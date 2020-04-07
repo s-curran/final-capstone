@@ -5,6 +5,7 @@
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         There were problems registering this user.
       </div>
+      <div id="un">
       <label for="username" class="sr-only">Username</label>
       <input
         type="text"
@@ -15,6 +16,8 @@
         required
         autofocus
       />
+      </div>
+      <div id="pw">
       <label for="password" class="sr-only">Password</label>
       <input
         type="password"
@@ -24,6 +27,7 @@
         v-model="user.password"
         required
       />
+    
       <input
         type="password"
         id="confirmPassword"
@@ -32,12 +36,18 @@
         v-model="user.confirmPassword"
         required
       />
-      <router-link :to="{ name: 'login' }">
-        Have an account?
-      </router-link>
+      </div>
+      <div id="btn">
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
+      </div>
+      <div id="login">
+      <router-link :to="{ name: 'login' }">
+        Have an account? Click here to login.
+      </router-link>
+      </div>
+
     </form>
   </div>
 </template>
@@ -80,5 +90,43 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#login{
+  text-align: center;
+  margin: 10px;
+}
+#username{
+  text-align: left;
+  margin: 10px;
+}
+#password{
+  text-align: left;
+  margin: 10px;
+}
+h1 {
+  background:#f2f2f2;
+  color:#5c8578;
+  padding:10px;
+  font-size:24px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.sr-only{  width:450px;
+  background: #fff;
+  margin: 50px auto;
+  font-family: 'Roboto Condensed', sans-serif;
+  border-radius: 10px;
+}
+input {
+  border-bottom:1px solid #f2f2f2;
+  padding:10px 20px;
+
+}
+#btn{
+  text-align: center;
+  margin:10px;
+}
 </style>
