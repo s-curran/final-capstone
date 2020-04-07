@@ -73,6 +73,8 @@ export default {
           .catch(err => {
             console.log(err);
           });
+
+          this.$emit('results', this.results);
     },
     // findLandmarks() {
     //   const proxyurl = "https://cors-anywhere.herokuapp.com/";
