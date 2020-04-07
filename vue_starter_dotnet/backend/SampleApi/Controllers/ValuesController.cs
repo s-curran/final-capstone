@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -49,5 +50,14 @@ namespace SampleApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("places")]
+        public IActionResult Places(string location, string radius, string type, bool opennow)
+        {
+            //location=${this.lat},${this.long}&radius=${this.radius}&type=${this.type}&key=${this.key}
+            WebClient client = new WebClient();
+            string url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={location}&radius={radius}&type={type}&key=AIzaSyANWIg-qW05HeNmXG2Yh1Fd7w8I9w4WXto&opennow={opennow}";
+            string s = client.DownloadString(url);
+            return new ContentResult() { Content = s };
+        }
     }
 }
