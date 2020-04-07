@@ -1,7 +1,7 @@
 <template>
   <div class="search">
-    <!-- <input type="text" placeholder="Enter your city..." v-model="city" />
-    <br />-->
+    <!-- <input type="text" placeholder="Enter your city..." v-model="city" /> -->
+    <br />
 
     <button type="button" @click="getLocation">Allow Access to Your Location</button>
     <br />
@@ -28,7 +28,7 @@
     </div>
    
     <label>Only open now</label>
-    <input type="checkbox" v-model="opennow" value="true" />
+    <input type="checkbox" v-model="opennow" />
     <br />
     <button type="submit" @click="findLandmarks">Submit</button>
     <!-- <ul>
@@ -44,11 +44,11 @@ export default {
     return {
       lat: "",
       long: "",
-      //   lat: "41.505550",
-      //   long: "-81.691498",
+        // lat: "41.505550",
+        // long: "-81.691498",
       radius: "",
       type: "",
-      opennow: "",
+      opennow: false,
       key: "AIzaSyANWIg-qW05HeNmXG2Yh1Fd7w8I9w4WXto",
       results: [],
       city: ""
@@ -57,12 +57,13 @@ export default {
   methods: {
     findLandmarks() {
       let url = `${process.env.VUE_APP_REMOTE_API}/search/places?location=${this.lat},${this.long}&radius=${this.radius}&type=${this.type}&opennow=${this.opennow}`;
-
+      
       fetch(url)
         .then(response => {
           if (response.ok) {
             response.text().then(txt => {
               this.results = JSON.parse(txt).results;
+              this.$emit("results", this.results);
             });
           } else {
             console.log(response.status);
@@ -72,7 +73,7 @@ export default {
           console.log(err);
         });
 
-      this.$emit("results", this.results);
+      
     },
     getLocation() {
       if (navigator.geolocation) {
