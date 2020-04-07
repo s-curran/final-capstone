@@ -28,9 +28,9 @@
     <input type="checkbox" v-model="opennow" value="true" />
     <br />
     <button type="submit" @click="findLandmarks">Submit</button>
-    <!-- <ul>
+    <ul>
       <li v-for="result in results" v-bind:key="result.id">{{result.name}}</li>
-    </ul> -->
+    </ul>
   </div>
 </template>
 
@@ -40,8 +40,8 @@ export default {
   name: "Search",
   data() {
     return {
-      //lat: '',
-      //long: '',
+    //   lat: '',
+    //   long: '',
       lat: "41.505550",
       long: "-81.691498",
       radius: "",
@@ -55,7 +55,7 @@ export default {
   methods: {
       findLandmarks() {
       
-        let url = `${process.env.VUE_APP_REMOTE_API}/values/places?location=${this.lat},${this.long}&radius=${this.radius}&type=${this.type}&key=${this.key}`;
+        let url = `${process.env.VUE_APP_REMOTE_API}/search/places?location=${this.lat},${this.long}&radius=${this.radius}&type=${this.type}&key=${this.key}`;
         if (this.opennow) {
           url += "&opennow=true";
         }
@@ -111,7 +111,7 @@ export default {
       }
     },
     showPosition(position) {
-      this.lat = position.coords.latitute;
+      this.lat = position.coords.latitude;
       this.long = position.coords.longitude;
     }
   }
