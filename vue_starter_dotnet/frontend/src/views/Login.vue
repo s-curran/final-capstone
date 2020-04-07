@@ -80,6 +80,43 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#login{
+  text-align: center;
+  margin: 10px;
+}
+#username{
+  text-align: left;
+  margin: 10px;
+}
+#password{
+  text-align: left;
+  margin: 10px;
+}
+h1 {
+  background:#f2f2f2;
+  color:#5c8578;
+  padding:10px;
+  font-size:24px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.sr-only{  width:450px;
+  background: #fff;
+  margin: 50px auto;
+  font-family: 'Roboto Condensed', sans-serif;
+  border-radius: 10px;
+}
+input {
+  border-bottom:1px solid #f2f2f2;
+  padding:10px 20px;
 
+}
+#btn{
+  text-align: center;
+  margin:10px;
+}
 </style>
