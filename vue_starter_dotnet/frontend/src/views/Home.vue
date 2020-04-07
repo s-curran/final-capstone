@@ -1,8 +1,10 @@
 <template>
   <div class="home">
     <h1 class="pageTitle">City Tours</h1>
-    <search class="search"></search>
-      <div v-if="searchResults.length >=1">
+    <!-- <search class="search" ></search> -->
+    <search class="search" v-on:results="displayResults" v-model="searchResults"></search>
+
+    <div v-if="searchResults.length >=1">
         <h3 class="listTitle">Landmarks to visit in {{cityName}}:</h3>
       <ul>
         <li v-for="result in searchResults" v-bind:key="result" class="result">
@@ -26,14 +28,21 @@ export default {
   },
   data(){
     return{
-    cityName: "cleveland",
+    cityName: "Cleveland",
+
     searchResults: [
-    { id: "3cf5baf562b322d3bd794748a971263f6af071df", name: "Nautica Queen Cleveland's Dining Cruise Ship"},
-    { id: "6edc2f98f10c2d0137ecc4c135db3760605df971", name: "Shooters On the Water"},
-    { id: "f37878763520ba80ccd8fc4772137754d63c1c86", name: "Lago East Bank"},
-    { id: "7c9160b5e479779b9b1b3ecc6b72f4c3703c30df", name: "Alley Cat Oyster Bar"},
+    // { id: "3cf5baf562b322d3bd794748a971263f6af071df", name: "Nautica Queen Cleveland's Dining Cruise Ship"},
+    // { id: "6edc2f98f10c2d0137ecc4c135db3760605df971", name: "Shooters On the Water"},
+    // { id: "f37878763520ba80ccd8fc4772137754d63c1c86", name: "Lago East Bank"},
+    // { id: "7c9160b5e479779b9b1b3ecc6b72f4c3703c30df", name: "Alley Cat Oyster Bar"},
   ]
     };
+  },
+  methods: {
+    displayResults(results)
+    {
+      this.searchResults = results;
+    }
   }
 
 }
