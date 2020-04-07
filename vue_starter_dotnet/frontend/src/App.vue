@@ -1,22 +1,24 @@
 <template>
   <div id="app">
     <div id="nav">
+    <!-- <img src="./views/pic1.png" /> -->
+    <h1 id="pageTitle">City Tours</h1>
+
       <div v-if="user">
-        Logged in
+        
         <div>
           <button v-on:click="logout">Logout</button>
         </div>
       </div>
       <div v-else>
-        <div>
-          <router-link :to="{name: 'login'}">Login</router-link>
-        </div>
-        <div>
-          <router-link :to="{name: 'register'}">Register</router-link>
-        </div>
+          <button><router-link id="link" :to="{name: 'login'}">Login</router-link></button>
+          <div></div>
+          <button><router-link id="link" :to="{name: 'register'}">Register</router-link></button>
+
       </div>
-      <router-link to="/">Home</router-link>
+      <button><router-link id="link" to="/">Home</router-link></Button>
     </div>
+
     <router-view />
   </div>
 </template>
@@ -47,3 +49,26 @@ export default {
   }
 };
 </script>
+<style scoped>
+#nav{
+  background: url(./views/pic10.jpg);
+}
+#link{
+  text-decoration: none;
+}
+button{
+  margin-left: 10px;
+  background-color: white;
+  text-align: right;
+  Font: Verdana;
+  font-size: 20px;
+  border-radius: 8px;
+  margin:10px;
+}
+#pageTitle{
+  font-family: 'Lobster', cursive;
+  font-size: 55px;
+  color: #515458 ;
+  text-align: center;
+}
+</style>

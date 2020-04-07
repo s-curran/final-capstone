@@ -92,7 +92,7 @@ export default {
 
 <style scoped>
 #login{
-  text-align: center;
+  text-align: left;
   margin: 10px;
 }
 #username{
@@ -104,8 +104,8 @@ export default {
   margin: 10px;
 }
 h1 {
-  background:#f2f2f2;
-  color:#5c8578;
+  background:#515458;
+  color: #03dbfc;
   padding:10px;
   font-size:24px;
   text-transform: uppercase;
@@ -114,10 +114,12 @@ h1 {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.sr-only{  width:450px;
+.sr-only{  
+  width:450px;
   background: #fff;
   margin: 50px auto;
-  font-family: 'Roboto Condensed', sans-serif;
+  font: Verdana;
+  font-size: 20px;
   border-radius: 10px;
 }
 input {
@@ -125,8 +127,16 @@ input {
   padding:10px 20px;
 
 }
-#btn{
-  text-align: center;
+button{
+  background-color: #03dbfc;
+  text-align: left;
+  Font: Verdana;
+  font-size: 20px;
+  border-radius: 8px;
   margin:10px;
+}
+button:hover{
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
 }
 </style>
