@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace SampleApi.DAL
 {
-    interface IItineraryDAO
-    {
+    public interface IItineraryDAO
+    {   
+
     }
 }
