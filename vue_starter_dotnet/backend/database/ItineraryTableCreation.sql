@@ -10,13 +10,13 @@ create table Itinerary (
 )
 
 create table Landmark (
-	LandmarkID int Primary Key not null,
+	LandmarkID nvarchar(150) Primary Key not null,
 	LandmarkName nvarchar(150) not null,
 	LandmarkAddress nvarchar(150) not null,
 )
 
 create table LandmarkItinerary (
-	LandmarkID int not null,
+	LandmarkID nvarchar(150) not null,
 	ItineraryID int not null,
 	OrderNumber int not null,
 	Constraint fk_LandmarkID foreign key(LandmarkID) references Landmark(LandmarkID),
