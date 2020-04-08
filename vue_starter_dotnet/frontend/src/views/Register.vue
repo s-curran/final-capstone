@@ -27,7 +27,7 @@
         v-model="user.password"
         required
       />
-    
+      <div class="confirm">
       <input
         type="password"
         id="confirmPassword"
@@ -36,6 +36,7 @@
         v-model="user.confirmPassword"
         required
       />
+      </div>
       </div>
       <div id="btn">
       <button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -92,16 +93,30 @@ export default {
 
 <style scoped>
 #login{
-  text-align: left;
+  text-align: center;
   margin: 10px;
+}
+#un{
+      text-align: center;
+
 }
 #username{
-  text-align: left;
+  text-align: center;
   margin: 10px;
 }
+#pw{
+    text-align: center;
+}
 #password{
-  text-align: left;
+  text-align: center;
   margin: 10px;
+}
+#confirmPassword{
+  text-align: center;
+  margin-bottom: 60px;
+}
+.confirm{
+  margin-left:85px;
 }
 h1 {
   background:#515458;
@@ -115,23 +130,30 @@ h1 {
   border-top-right-radius: 10px;
 }
 .sr-only{  
-  width:450px;
+  width: 250px;
+  text-align: left;
   background: #fff;
   margin: 50px auto;
   font: Verdana;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 10px;
 }
 input {
-  border-bottom:1px solid #f2f2f2;
-  padding:10px 20px;
+  width: 250px;
+  text-align: right;
 
+  border-bottom:1px solid #f2f2f2;
+  padding:10px 10px;
+
+}
+#btn{
+  text-align: center;
 }
 button{
   background-color: #03dbfc;
-  text-align: left;
+  text-align: center;
   Font: Verdana;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 8px;
   margin:10px;
 }
