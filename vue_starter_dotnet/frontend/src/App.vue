@@ -51,24 +51,27 @@ export default {
 </script>
 <style scoped>
 #nav{
-  background: url(./views/pic10.jpg);
+  background-image: url(./views/pic13.jpg);
+  background-repeat:no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: #A4C2ED;
 }
 #link{
   text-decoration: none;
 }
 button{
-  margin-left: 10px;
   background-color: white;
   text-align: right;
   Font: Verdana;
-  font-size: 20px;
+  font-size: 12px;
   border-radius: 8px;
   margin:10px;
 }
 #pageTitle{
   font-family: 'Lobster', cursive;
   font-size: 55px;
-  color: #515458 ;
+  color: white ;
   text-align: center;
 }
 </style>

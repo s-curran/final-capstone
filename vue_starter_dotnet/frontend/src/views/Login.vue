@@ -8,6 +8,7 @@
       <div class="alert alert-success" role="alert" v-if="this.$route.query.registration">
         Thank you for registering, please sign in.
       </div>
+      <div id="username">
       <label for="username" class="sr-only">Username</label>
       <input
         type="text"
@@ -18,6 +19,8 @@
         required
         autofocus
       />
+      </div>
+      <div id="password">
       <label for="password" class="sr-only">Password</label>
       <input
         type="password"
@@ -27,8 +30,11 @@
         v-model="user.password"
         required
       />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
-      <button type="submit">Sign in</button>
+      </div>
+      <div id="btn"><button type="submit">Sign in</button></div>
+      <div id="register">
+      <router-link :to="{ name: 'register' }">Need an account? Click here to create an account.</router-link>
+      </div>
     </form>
   </div>
 </template>
@@ -81,21 +87,22 @@ export default {
 </script>
 
 <style scoped>
-#login{
+#register{
   text-align: center;
   margin: 10px;
 }
 #username{
-  text-align: left;
+  text-align: center;
   margin: 10px;
 }
 #password{
-  text-align: left;
+  text-align: center;
   margin: 10px;
+  margin-bottom: 30px;
 }
 h1 {
-  background:#f2f2f2;
-  color:#5c8578;
+  background:#515458;
+  color: #03dbfc;
   padding:10px;
   font-size:24px;
   text-transform: uppercase;
@@ -104,19 +111,31 @@ h1 {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.sr-only{  width:450px;
+.sr-only{  
+  width:450px;
   background: #fff;
   margin: 50px auto;
-  font-family: 'Roboto Condensed', sans-serif;
+  font: Verdana;
+  font-size: 15px;
   border-radius: 10px;
 }
 input {
   border-bottom:1px solid #f2f2f2;
-  padding:10px 20px;
+  padding:10px 10px;
 
 }
 #btn{
   text-align: center;
+}
+button{
+  background-color: #03dbfc;
+  Font: Verdana;
+  font-size: 15px;
+  border-radius: 8px;
   margin:10px;
+}
+button:hover{
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
 }
 </style>

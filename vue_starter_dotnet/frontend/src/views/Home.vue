@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1 class="pageTitle">City Tours</h1>
     <!-- <search class="search" ></search> -->
     <search class="search" v-on:results="displayResults" v-model="searchResults"></search>
 
