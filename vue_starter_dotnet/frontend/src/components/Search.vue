@@ -62,6 +62,7 @@ export default {
         .then(response => {
           if (response.ok) {
             response.text().then(txt => {
+              // console.log(txt)
               this.results = JSON.parse(txt).results;
               this.$emit("results", this.results);
             });

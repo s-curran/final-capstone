@@ -7,7 +7,8 @@
         <h3 class="listTitle">Landmarks to visit {{cityName}}:</h3>
       <ul>
         <li v-for="result in searchResults" v-bind:key="result" class="result">
-         <a v-bind:href="`{{result.name}}`">{{result.name}}</a>
+          <router-link :to="{ name: 'detail', params: { id: result.id }}">{{result.name}}</router-link>
+         <!-- <a v-bind:href="`{{result.name}}`">{{result.name}}</a> -->
         </li>
       </ul>
       </div>

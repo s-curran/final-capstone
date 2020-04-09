@@ -6,6 +6,8 @@ import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import ExistingItinerary from './views/ExistingItinerary.vue'
 import Search from './components/Search.vue'
+import Detail from './views/Detail.vue'
+
 
 Vue.use(Router)
 
@@ -21,8 +23,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'home',
       component: Home,
@@ -49,14 +50,14 @@ const router = new Router({
     // {
     //   path: "/"
     // },
-    // {
-    // path: "/detail",
-    // name: "detail",
-    // component: "detail",
-    // meta: {
-    //   requiresAuth: false
-    // }
-    // },
+    {
+      path: "/detail/:id",
+      name: "detail",
+      component: Detail,
+      meta: {
+        requiresAuth: false
+      }
+    },
     {
       path: "/itinerary/:id",
       name: "itinerary",
