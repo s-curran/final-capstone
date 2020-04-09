@@ -4,6 +4,7 @@ import auth from './auth'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
+import ExistingItinerary from './views/ExistingItinerary.vue'
 
 Vue.use(Router)
 
@@ -44,6 +45,15 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: "/itinerary/:id",
+      name: "itinerary",
+      component: ExistingItinerary,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
   ]
 })
 
