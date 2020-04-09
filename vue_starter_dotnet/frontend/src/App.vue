@@ -14,7 +14,7 @@
           <button><router-link id="link" :to="{name: 'login'}">Login</router-link></button>
           <div></div>
           <button><router-link id="link" :to="{name: 'register'}">Register</router-link></button>
-
+          <!-- <button> <router-link id="link" :to="{mane: 'detail'}">Detail</router-link></button> Should not be on this page-->
       </div>
       <button><router-link id="link" to="/">Home</router-link></Button>
     </div>

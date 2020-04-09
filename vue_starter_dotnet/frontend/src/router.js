@@ -5,6 +5,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import ExistingItinerary from './views/ExistingItinerary.vue'
+import Search from './components/Search.vue'
 
 Vue.use(Router)
 
@@ -45,6 +46,17 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    // {
+    //   path: "/"
+    // },
+    // {
+    // path: "/detail",
+    // name: "detail",
+    // component: "detail",
+    // meta: {
+    //   requiresAuth: false
+    // }
+    // },
     {
       path: "/itinerary/:id",
       name: "itinerary",
@@ -53,7 +65,14 @@ const router = new Router({
         requiresAuth: true
       }
     },
-
+    {
+      path: "/search",
+      name: "search",
+      component: Search,
+      meta: {
+        requiresAuth: false
+      }
+    }
   ]
 })
 

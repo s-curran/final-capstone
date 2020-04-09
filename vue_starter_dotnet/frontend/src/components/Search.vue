@@ -6,34 +6,34 @@
     <button type="button" @click="getLocation">Allow Access to Your Location</button>
     <br />
     <div class="box">
-    <label>Distance:</label>
+      <label>Distance:</label>
 
-    <select v-model="radius">
-      <option value="1609.34">1 mile</option>
-      <option value="3218.69">2 miles</option>
-      <option value="8046.72">5 miles</option>
-      <option value="16093.4">10 miles</option>
-    </select>
+      <select v-model="radius">
+        <option value="1609.34">1 mile</option>
+        <option value="3218.69">2 miles</option>
+        <option value="8046.72">5 miles</option>
+        <option value="16093.4">10 miles</option>
+      </select>
     </div>
-   
+
     <div class="box">
-    <label>Type:</label>
-    <select v-model="type">
-      <option value="tourist_attraction">Tourist Atrraction</option>
-      <option value="restaurant">Restaurant</option>
-      <option value="stadium">Sports</option>
-      <option value="zoo">Zoo</option>
-      <option value="museum">Museum</option>
-    </select>
+      <label>Type:</label>
+      <select v-model="type">
+        <option value="tourist_attraction">Tourist Atrraction</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="stadium">Sports</option>
+        <option value="zoo">Zoo</option>
+        <option value="museum">Museum</option>
+      </select>
     </div>
-   
+
     <label>Only open now</label>
     <input type="checkbox" v-model="opennow" />
     <br />
     <button type="submit" @click="findLandmarks">Submit</button>
     <!-- <ul>
       <li v-for="result in results" v-bind:key="result.id">{{result.name}}</li>
-    </ul> -->
+    </ul>-->
   </div>
 </template>
 
@@ -44,8 +44,8 @@ export default {
     return {
       lat: "",
       long: "",
-        // lat: "41.505550",
-        // long: "-81.691498",
+      // lat: "41.505550",
+      // long: "-81.691498",
       radius: "",
       type: "",
       opennow: false,
@@ -57,7 +57,7 @@ export default {
   methods: {
     findLandmarks() {
       let url = `${process.env.VUE_APP_REMOTE_API}/search/places?location=${this.lat},${this.long}&radius=${this.radius}&type=${this.type}&opennow=${this.opennow}`;
-      
+
       fetch(url)
         .then(response => {
           if (response.ok) {
@@ -72,8 +72,6 @@ export default {
         .catch(err => {
           console.log(err);
         });
-
-      
     },
     getLocation() {
       if (navigator.geolocation) {
@@ -124,11 +122,11 @@ label {
 }
 
 .box {
-    margin: 0 auto 0 auto;
-    display: flex;
-    width: 300px;
-    justify-content: space-between;
-    align-items: center; 
+  margin: 0 auto 0 auto;
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 select {

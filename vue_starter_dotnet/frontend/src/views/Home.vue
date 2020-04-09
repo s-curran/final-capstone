@@ -4,10 +4,10 @@
     <search class="search" v-on:results="displayResults" v-model="searchResults"></search>
 
     <div v-if="searchResults.length >=1">
-        <h3 class="listTitle">Landmarks to visit in {{cityName}}:</h3>
+        <h3 class="listTitle">Landmarks to visit {{cityName}}:</h3>
       <ul>
         <li v-for="result in searchResults" v-bind:key="result" class="result">
-            {{result.name}}
+         <a v-bind:href="`{{result.name}}`">{{result.name}}</a>
         </li>
       </ul>
       </div>
@@ -27,7 +27,7 @@ export default {
   },
   data(){
     return{
-    cityName: "Cleveland",
+    cityName: "near you",
 
     searchResults: [
     // { id: "3cf5baf562b322d3bd794748a971263f6af071df", name: "Nautica Queen Cleveland's Dining Cruise Ship"},
