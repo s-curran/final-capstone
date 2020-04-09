@@ -25,5 +25,15 @@ namespace SampleApi.Controllers
             string s = client.DownloadString(url);
             return new ContentResult() { Content = s };
         }
+
+        [HttpGet("place")]
+        public IActionResult Places(string placeId)
+        {
+            WebClient client = new WebClient();
+            string url = $"https://maps.googleapis.com/maps/api/place/details/json?placeid={placeId}&key=AIzaSyANWIg-qW05HeNmXG2Yh1Fd7w8I9w4WXto";
+
+            string s = client.DownloadString(url);
+            return new ContentResult() { Content = s };
+        }
     }
 }
