@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'existingItinerary',
+  name: 'ExistingItinerary',
   components: {},
   created(){
       this.getItinerary(this.$route.params.id);

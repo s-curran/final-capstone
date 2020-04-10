@@ -63,7 +63,7 @@ const router = new Router({
       name: "itinerary",
       component: ExistingItinerary,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
