@@ -2,6 +2,11 @@
     <div class="detail">
        <h2> Site Details </h2>
       <h2>{{landmark.name}}</h2>
+      <h2>{{landmark.name}}</h2>
+      <h2>{{landmark.name}}</h2>
+      <h2>Total number of ratings to date: {{landmark.user_ratings_total}}</h2>
+      <h2>Address: {{landmark.vicinity}}</h2>
+      <h2>Composite Rating (out of 5): {{landmark.rating}}</h2>
         
     </div>
 </template>

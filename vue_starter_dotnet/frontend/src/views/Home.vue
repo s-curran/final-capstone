@@ -2,7 +2,7 @@
   <div class="home">
     <!-- <search class="search" ></search> -->
     <search class="search" v-on:results="displayResults" v-model="searchResults"></search>
-
+<create-itin></create-itin>
     <div v-if="searchResults.length >=1">
         <h3 class="listTitle">Landmarks to visit {{cityName}}:</h3>
       <ul>
@@ -20,11 +20,13 @@
 
 <script>
 import Search from '@/components/Search.vue'
+import CreateItin from '@/components/CreateItinerary.vue'
 
 export default {
   name: 'home',
   components: {
-    Search
+    Search,
+    CreateItin,
   },
   data(){
     return{
