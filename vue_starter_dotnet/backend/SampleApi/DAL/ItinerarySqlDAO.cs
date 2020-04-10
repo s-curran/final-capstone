@@ -218,5 +218,34 @@ ORDER BY OrderNumber";
             }
             return trip;
         }
+        public bool deleteItinerary(int itineraryId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = 
+                        @"DELETE FROM LandmarkItinerary WHERE ItineraryID = @id
+                        DELETE FROM Itinerary WHERE ItineraryID = @id";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", itineraryId);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if(rowsAffected > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
     }
 }
