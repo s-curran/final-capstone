@@ -11,6 +11,9 @@
 </template>
 
 <script>
+import auth from '../auth'
+
+
 export default {
   name: 'ExistingItinerary',
   components: {},
@@ -39,7 +42,11 @@ export default {
   methods: {
     getItinerary(itineraryid) {      
       fetch(`${process.env.VUE_APP_REMOTE_API}/itinerary/display?itineraryId=${itineraryid}`, {
-        method: 'GET'
+        method: 'GET',
+                headers: new Headers( {
+            Authorization: "Bearer " + auth.getToken()
+        })
+
       })
         .then((response) => {
           if (response.ok) {

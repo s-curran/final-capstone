@@ -67,7 +67,7 @@ namespace SampleApi.Controllers
         /// <param name="itineraryId"></param>
         /// <returns></returns>
         [HttpGet("display")]
-        //[Authorize(Roles = "User")]
+        [Authorize]
         public IActionResult Display(int itineraryId)
         {
             Itinerary itinerary = itineraryDAO.getItineraryById(itineraryId);
@@ -111,7 +111,7 @@ namespace SampleApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("list")]
-        //[Authorize]
+        [Authorize]
         public IActionResult List()
         {
             string username = User.Identity.Name;
