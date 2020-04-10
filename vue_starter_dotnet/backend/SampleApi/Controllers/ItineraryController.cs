@@ -111,10 +111,12 @@ namespace SampleApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("list")]
-        [Authorize]
+        //[Authorize]
         public IActionResult List()
         {
-            User user = userDAO.GetUser(User.Identity.Name);
+            string username = User.Identity.Name;
+
+            User user = userDAO.GetUser(username);
 
             IList<Itinerary> userItinerary = itineraryDAO.getUserItineraries(user.Id);
 

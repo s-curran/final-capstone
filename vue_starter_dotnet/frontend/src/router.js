@@ -7,6 +7,8 @@ import Register from './views/Register.vue'
 import ExistingItinerary from './views/ExistingItinerary.vue'
 import Search from './components/Search.vue'
 import Detail from './views/Detail.vue'
+import ItineraryList from './views/ItineraryList.vue'
+
 
 
 Vue.use(Router)
@@ -66,6 +68,15 @@ const router = new Router({
         requiresAuth: true
       }
     },
+    {
+      path: "/itineraries",
+      name: "itineraries",
+      component: ItineraryList,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
     {
       path: "/search",
       name: "search",

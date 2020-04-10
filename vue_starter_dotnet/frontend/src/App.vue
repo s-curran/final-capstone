@@ -9,7 +9,7 @@
         <div>
           <button v-on:click="logout">Logout</button>
           <div>
-          <button v-on:click="viewItinerary">View/Edit Saved Itinierary</button>
+          <button v-on:click="viewItinerary">View Saved Itineraries</button>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@ export default {
       this.user = null;
     },
     viewItinerary() {
-      this.$router.push('/itinerary/:id');
+      this.$router.push('/itineraries');
     },
 
   },
