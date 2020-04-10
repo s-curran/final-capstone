@@ -67,7 +67,7 @@ namespace SampleApi.Controllers
         /// <param name="itineraryId"></param>
         /// <returns></returns>
         [HttpGet("display")]
-        //[Authorize]
+        //[Authorize(Roles = "User")]
         public IActionResult Display(int itineraryId)
         {
             Itinerary itinerary = itineraryDAO.getItineraryById(itineraryId);
