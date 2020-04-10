@@ -1,8 +1,12 @@
 <template>
   <div>
     <!-- get the list from backend for this user - loop through and display landmark names in order -->
-    <div v-for="itin in itineraries" v-bind:key="itin.itineraryId">
-        <p>{{itin.tourName}}</p>
+    <div>
+        <ul>
+            <li v-for="itin in itineraries" v-bind:key="itin.itineraryId" >
+            <router-link :to="{ name: 'itinerary', params: { id: itin.itineraryId }}">{{itin.tourName}}</router-link>
+            </li>
+      </ul>
     </div>
   </div>
 </template>
