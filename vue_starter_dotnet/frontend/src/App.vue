@@ -8,6 +8,9 @@
         
         <div>
           <button v-on:click="logout">Logout</button>
+          <div>
+          <button v-on:click="viewItinerary">View/Edit Saved Itinierary</button>
+          </div>
         </div>
       </div>
       <div v-else>
@@ -38,6 +41,10 @@ export default {
       this.$router.push('/login');
       this.user = null;
     },
+    viewItinerary() {
+      this.$router.push('/itinerary/:id');
+    },
+
   },
   created() {
     this.user = auth.getUser();

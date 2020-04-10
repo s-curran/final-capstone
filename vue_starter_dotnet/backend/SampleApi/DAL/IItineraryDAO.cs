@@ -13,7 +13,8 @@ namespace SampleApi.DAL
         bool addToItinerary(int itineraryId, int orderNum, Landmark landmark);
         IList<Landmark> getItinerary(int itinderaryId);
         IList<Landmark> getLandmarks();
-        IList<Itinerary> getUserItinerary(int id);
+        IList<Itinerary> getUserItineraries(int id);
+        Itinerary getItineraryById(int id);
         bool deleteItinerary(int itineraryId);
     }
 }

@@ -17,7 +17,7 @@ namespace SampleApi.DAL
         public int createItinerary(Itinerary itinerary)
         {
             //Itinerary itinerary = new Itinerary();
-            
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -41,7 +41,7 @@ namespace SampleApi.DAL
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
 
         public bool addLandmark(Landmark landmark)
@@ -101,7 +101,7 @@ namespace SampleApi.DAL
                     }
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -141,7 +141,7 @@ namespace SampleApi.DAL
             }
             return false;
         }
-        public IList<Itinerary> getUserItinerary(int userId)
+        public IList<Itinerary> getUserItineraries(int userId)
         {
             IList<Itinerary> userItinerary = new List<Itinerary>();
             try
@@ -156,7 +156,7 @@ namespace SampleApi.DAL
                     cmd.Parameters.AddWithValue("@id", userId);
 
                     SqlDataReader rdr = cmd.ExecuteReader();
-                    
+
                     while (rdr.Read())
                     {
                         Itinerary itinerary = new Itinerary()
@@ -172,7 +172,7 @@ namespace SampleApi.DAL
                     }
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw ex;
             }
@@ -201,7 +201,7 @@ ORDER BY OrderNumber";
 
                     SqlDataReader rdr = cmd.ExecuteReader();
 
-                    while(rdr.Read())
+                    while (rdr.Read())
                     {
                         Landmark landmark = new Landmark();
                         landmark.LandmarkId = Convert.ToString(rdr["LandmarkID"]);
@@ -218,6 +218,41 @@ ORDER BY OrderNumber";
             }
             return trip;
         }
+
+        public Itinerary getItineraryById(int Itineraryid)
+        {
+            Itinerary itinerary = new Itinerary();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = "select * from Itinerary where ItineraryID = @id";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", Itineraryid);
+
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        itinerary.ItineraryId = Convert.ToInt32(rdr["ItineraryID"]);
+                        itinerary.UserId = Convert.ToInt32(rdr["UserID"]);
+                        itinerary.DateOfTour = Convert.ToDateTime(rdr["DateOfTour"]);
+                        itinerary.TourName = Convert.ToString(rdr["TourName"]);
+                        itinerary.StartPoint = Convert.ToString(rdr["StartPoint"]);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            return itinerary;
+
+        }
+
         public bool deleteItinerary(int itineraryId)
         {
             try
@@ -226,7 +261,7 @@ ORDER BY OrderNumber";
                 {
                     conn.Open();
 
-                    string sql = 
+                    string sql =
                         @"DELETE FROM LandmarkItinerary WHERE ItineraryID = @id
                         DELETE FROM Itinerary WHERE ItineraryID = @id";
 
@@ -235,7 +270,7 @@ ORDER BY OrderNumber";
 
                     int rowsAffected = cmd.ExecuteNonQuery();
 
-                    if(rowsAffected > 0)
+                    if (rowsAffected > 0)
                     {
                         return true;
                     }
@@ -247,5 +282,6 @@ ORDER BY OrderNumber";
             }
             return false;
         }
+
     }
 }

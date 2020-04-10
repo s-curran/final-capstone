@@ -70,16 +70,10 @@ namespace SampleApi.Controllers
         [Authorize]
         public IActionResult Display(int itineraryId)
         {
-            IList<Landmark> itinerary = itineraryDAO.getItinerary(itineraryId);
+            Itinerary itinerary = itineraryDAO.getItineraryById(itineraryId);
+            itinerary.Landmarks = itineraryDAO.getItinerary(itineraryId);
 
-            if (itinerary.Count > 0)
-            {
-                return new JsonResult(itinerary);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(itinerary);
         }
 
         /// <summary>
@@ -122,11 +116,11 @@ namespace SampleApi.Controllers
         {
             User user = userDAO.GetUser(User.Identity.Name);
 
-            IList<Itinerary> userItinerary = itineraryDAO.getUserItinerary(user.Id);
+            IList<Itinerary> userItinerary = itineraryDAO.getUserItineraries(user.Id);
 
             if (userItinerary.Count > 0)
             {
-                return new JsonResult(userItinerary);
+                return Ok(userItinerary);
             }
             else
             {
