@@ -133,5 +133,21 @@ namespace SampleApi.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpDelete("delete")]
+        [Authorize]
+        public IActionResult Delete(int itineraryId)
+        {
+            bool deleted = itineraryDAO.deleteItinerary(itineraryId);
+
+            if (deleted)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

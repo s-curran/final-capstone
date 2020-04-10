@@ -12,6 +12,6 @@ namespace SampleApi.Models
         public DateTime DateOfTour { get; set; }
         public string TourName { get; set; }
         public string StartPoint { get; set; }
-        public IDictionary<int, Landmark> ItineraryOrder { get; set; }
+        //public IDictionary<int, Landmark> ItineraryOrder { get; set; }
     }
 }
