@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      itin: {itineraryId: ''},
+      itineraryId: '',
       selectshow: false,
       showform: false,
       itineraries: [
@@ -77,10 +77,10 @@ export default {
         .catch((err) => console.error(err));
     },
       handleEvent(selected) {
-    this.itin.itineraryId = selected;
+    this.itineraryId = selected;
   },
       deleteItinerary() {   
-      let url = `${process.env.VUE_APP_REMOTE_API}/itinerary/delete`;
+      let url = `${process.env.VUE_APP_REMOTE_API}/itinerary/delete?itineraryId=${this.itineraryId}`;
       fetch(url, {
         method: "DELETE",
         headers: new Headers({
@@ -88,7 +88,7 @@ export default {
           Accept: "application/json",
           "Content-Type": "application/json"
         }),
-        body: JSON.stringify(this.itin.itineraryId)
+        // body: JSON.stringify(this.itin.itineraryId)
       })
         .then(response => {
           if (response.ok) {
