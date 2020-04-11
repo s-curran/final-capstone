@@ -1,11 +1,11 @@
 <template>
   <div>
     <label>Itinenary Name</label>
-    <input type="text" v-model="itinerary.itineraryName" />
+    <input type="text" v-model="itinerary.TourName" />
     <label>Itinenary Date</label>
-    <input type="date" v-model="itinerary.itineraryDate" />
+    <input type="date" v-model="itinerary.DateOfTour" />
     <label>Starting Address</label>
-    <input type="text" v-model="itinerary.itineraryLocation" />
+    <input type="text" v-model="itinerary.StartPoint" />
     <button type="button" @click="saveItin">Create</button>
   </div>
 </template>
@@ -17,9 +17,9 @@ export default {
   data() {
     return {
         itinerary: {
-      itineraryDate: "",
-      itineraryName: "",
-      itineraryLocation: ""
+      DateOfTour: "",
+      TourName: "",
+      StartPoint: ""
         }
     };
   },
@@ -37,7 +37,8 @@ export default {
       })
       .then(response => {
           if (response.ok){
-              response.json().then(json =>{
+              response.json()
+              .then(json =>{
                   console.log(json)
                   alert("Your itinerary has been created!!")
               })

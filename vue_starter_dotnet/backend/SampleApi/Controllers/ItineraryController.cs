@@ -37,23 +37,25 @@ namespace SampleApi.Controllers
         /// <returns></returns>
         [HttpPost("create")]
         [Authorize]
-        public IActionResult Create(DateTime date, string name, string location)
+        public IActionResult Create(Itinerary itinerary)
         {
+            // DateTime date, string name, string location
             // Get current user
             string username = User.Identity.Name;
 
             // Get user from name 
             User user = userDAO.GetUser(username);
-            
+
 
             // Create new itinerary from params
-            Itinerary itinerary = new Itinerary()
-            {
-                UserId = user.Id,
-                DateOfTour = date,
-                TourName = name,
-                StartPoint = location
-            };
+            //Itinerary itinerary = new Itinerary()
+            //{
+            //    UserId = user.Id,
+            //    DateOfTour = date,
+            //    TourName = name,
+            //    StartPoint = location
+            //};
+            itinerary.UserId = user.Id;
 
             // Call dao to add itinerary
             int itineraryId = itineraryDAO.createItinerary(itinerary);
@@ -130,6 +132,11 @@ namespace SampleApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete's a users itinerary
+        /// </summary>
+        /// <param name="itineraryId"></param>
+        /// <returns></returns>
         [HttpDelete("delete")]
         [Authorize]
         public IActionResult Delete(int itineraryId)
@@ -146,6 +153,12 @@ namespace SampleApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Removes a landmark from the itinerary
+        /// </summary>
+        /// <param name="itineraryId"></param>
+        /// <param name="landmarkId"></param>
+        /// <returns></returns>
         [HttpDelete("remove")]
         [Authorize]
         public IActionResult Remove(int itineraryId, string landmarkId)
