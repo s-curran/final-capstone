@@ -8,7 +8,7 @@
       <h2>Address: {{landmark.vicinity}}</h2>
       <h2>Composite Rating (out of 5): {{landmark.rating}}</h2>
       <select-itin @selected="handleEvent"></select-itin>
-        <add :LandmarkId="landmark.place_id" :ItineraryId="itineraryId"></add>
+        <add :LandmarkId="landmark.place_id" :LandmarkName="landmark.name" :LandmarkAddress="landmark.vicinity" :ItineraryId="itineraryId"></add>
     </div>
 </template>
 

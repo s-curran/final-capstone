@@ -9,5 +9,9 @@ namespace SampleApi.Models
     {
         public int ItineraryId { get; set; }
         public string LandmarkId { get; set; }
+        public string LandmarkName { get; set; }
+        public string LandmarkAddress { get; set; }
+
+
     }
 }

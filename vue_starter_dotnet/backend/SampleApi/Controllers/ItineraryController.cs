@@ -81,14 +81,20 @@ namespace SampleApi.Controllers
         [Authorize]
         public IActionResult Add(LandmarkItinVM vm)
         {
-            Landmark landmark = itineraryDAO.getLandmarkById(vm.LandmarkId);
+            Landmark lm = new Landmark()
+            {
+                LandmarkAddress = vm.LandmarkAddress,
+            LandmarkName = vm.LandmarkName,
+            LandmarkId = vm.LandmarkId
+        };
             IList<Landmark> landmarks = itineraryDAO.getLandmarks();
             int orderNum = 1;
 
-            if(!landmarks.Contains(landmark))
+            if(!landmarks.Contains(lm))
             {
-                itineraryDAO.addLandmark(landmark);
+                itineraryDAO.addLandmark(lm);
             }
+            Landmark landmark = itineraryDAO.getLandmarkById(vm.LandmarkId);
 
             bool added = itineraryDAO.addToItinerary(vm.ItineraryId, orderNum, landmark);
 
