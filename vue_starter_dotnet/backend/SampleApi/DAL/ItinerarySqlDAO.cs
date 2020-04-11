@@ -282,6 +282,36 @@ ORDER BY OrderNumber";
             }
             return false;
         }
+        public bool removeLandmark(int itineraryId, string landmarkId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql =
+                        @"DELETE FROM LandmarkItinerary WHERE ItineraryID = @id AND LandmarkID = @landmark";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id", itineraryId);
+                    cmd.Parameters.AddWithValue("@landmark", landmarkId);
+
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
 
     }
 }

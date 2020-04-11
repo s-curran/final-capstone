@@ -16,5 +16,6 @@ namespace SampleApi.DAL
         IList<Itinerary> getUserItineraries(int id);
         Itinerary getItineraryById(int id);
         bool deleteItinerary(int itineraryId);
+        bool removeLandmark(int itineraryId, string landmarkId);
     }
 }
