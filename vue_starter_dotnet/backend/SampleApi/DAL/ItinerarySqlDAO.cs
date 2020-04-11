@@ -107,6 +107,39 @@ namespace SampleApi.DAL
             }
             return landmarks;
         }
+        public Landmark getLandmarkById(string landmarkId)
+        {
+            Landmark landmark = new Landmark();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = "select * from Landmark where LandmarkID = @landmarkId";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@landmarkId", landmarkId);
+
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+
+                        landmark.LandmarkId = Convert.ToString(rdr["LandmarkID"]);
+                        landmark.LandmarkAddress = Convert.ToString(rdr["LandmarkAddress"]);
+                        landmark.LandmarkName = Convert.ToString(rdr["LandmarkName"]);
+                      
+                        
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            return landmark;
+        }
 
         public bool addToItinerary(int itineraryId, int orderNum, Landmark landmark)
         {

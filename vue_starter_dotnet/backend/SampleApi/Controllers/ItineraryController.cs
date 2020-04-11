@@ -39,7 +39,6 @@ namespace SampleApi.Controllers
         [Authorize]
         public IActionResult Create(Itinerary itinerary)
         {
-            // DateTime date, string name, string location
             // Get current user
             string username = User.Identity.Name;
 
@@ -48,13 +47,6 @@ namespace SampleApi.Controllers
 
 
             // Create new itinerary from params
-            //Itinerary itinerary = new Itinerary()
-            //{
-            //    UserId = user.Id,
-            //    DateOfTour = date,
-            //    TourName = name,
-            //    StartPoint = location
-            //};
             itinerary.UserId = user.Id;
 
             // Call dao to add itinerary
@@ -87,16 +79,18 @@ namespace SampleApi.Controllers
         /// <returns></returns>
         [HttpPost("add")]
         [Authorize]
-        public IActionResult Add(int id, int orderNum, Landmark landmark)
+        public IActionResult Add(LandmarkItinVM vm)
         {
+            Landmark landmark = itineraryDAO.getLandmarkById(vm.LandmarkId);
             IList<Landmark> landmarks = itineraryDAO.getLandmarks();
+            int orderNum = 1;
 
             if(!landmarks.Contains(landmark))
             {
                 itineraryDAO.addLandmark(landmark);
             }
 
-            bool added = itineraryDAO.addToItinerary(id, orderNum, landmark);
+            bool added = itineraryDAO.addToItinerary(vm.ItineraryId, orderNum, landmark);
 
             if (added)
             {
