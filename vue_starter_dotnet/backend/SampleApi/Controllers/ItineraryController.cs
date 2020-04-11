@@ -161,9 +161,9 @@ namespace SampleApi.Controllers
         /// <returns></returns>
         [HttpDelete("remove")]
         [Authorize]
-        public IActionResult Remove(int itineraryId, string landmarkId)
+        public IActionResult Remove(RemoveLandmarkVM vm)
         {
-            bool deleted = itineraryDAO.removeLandmark(itineraryId, landmarkId);
+            bool deleted = itineraryDAO.removeLandmark(vm.ItineraryId, vm.LandmarkId);
 
             if (deleted)
             {
