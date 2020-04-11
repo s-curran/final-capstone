@@ -1,8 +1,8 @@
 <template>
     <div id="detail">
       <h1 class="heading"> Site Details </h1>
-      <h3 class="itemDetails">{{landmark.name}}</h3>
-      <h3 class="itemDetails">Hours of Operation: {{landmark.name}}</h3>
+      <h3 class="itemDetails">Name of Attraction: {{landmark.name}}</h3>
+      
       <h3 class="itemDetails">Phone Number: {{landmark.international_phone_number}}</h3>
       <h3 class="itemDetails">Address: {{landmark.vicinity}}</h3>
       <h3 class="itemDetails">Composite Rating (out of 5): {{landmark.rating}}</h3>
@@ -72,18 +72,16 @@ created () {
 
 }
 #detail{
- font-family: verdana;
-    text-decoration: none;
+        font-family: verdana;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .itemDetails{
     font-family: verdana;
-    text-decoration: none;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .search{
   text-align: center;
