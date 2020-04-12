@@ -48,6 +48,7 @@ export default {
               .then(json =>{
                   console.log(json)
                   alert("Your itinerary has been created!!")
+                  
               })
           }
           else {
@@ -57,7 +58,8 @@ export default {
       .catch(err => {
           console.error(err)
       })
-  }
+  },
+  
 }
 }
 </script>

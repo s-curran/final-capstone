@@ -8,7 +8,7 @@
         <button type="button" @click="toggleForm">Create Itinerary</button>
       </div>
       <div v-else>
-        <create-itin class="create"></create-itin>
+        <create-itin class="create" ></create-itin>
       </div>
       <p>-OR-</p>
       <select-itin @selected="handleEvent" class="selectItin"></select-itin>
@@ -16,18 +16,21 @@
     <div v-if="searchResults.length >=1">
       <h3 class="listTitle">Landmarks to visit {{cityName}}:</h3>
       <ul>
-        <li v-for="result in searchResults" v-bind:key="result" class="result">
-          <router-link :to="{ name: 'detail', params: { id: result.place_id }}" class="resultText">{{result.name}}</router-link>
+        <div v-for="result in searchResults" v-bind:key="result" id="result">
+          <router-link
+            :to="{ name: 'detail', params: { id: result.place_id }}"
+            class="resultText"
+          >{{result.name}}</router-link>
           <div v-if="itineraryId" class="addTo">
-          <add 
-            :LandmarkId="result.place_id"
-            :LandmarkName="result.name"
-            :LandmarkAddress="result.vicinity"
-            :ItineraryId="itineraryId"
-          ></add>
+            <add
+              :LandmarkId="result.place_id"
+              :LandmarkName="result.name"
+              :LandmarkAddress="result.vicinity"
+              :ItineraryId="itineraryId"
+            ></add>
           </div>
           <!-- <a v-bind:href="`{{result.name}}`">{{result.name}}</a> -->
-        </li>
+        </div>
       </ul>
     </div>
     <div v-else>
@@ -41,7 +44,7 @@ import Search from "@/components/Search.vue";
 import CreateItin from "@/components/CreateItinerary.vue";
 import SelectItin from "@/components/SelectItinerary.vue";
 import auth from "../auth";
-import Add from "@/components/AddToItinerary.vue"
+import Add from "@/components/AddToItinerary.vue";
 
 export default {
   name: "home",
@@ -73,7 +76,7 @@ export default {
       this.itineraryId = selected;
     },
     toggleForm() {
-      this.toggle = true;
+      this.toggle = !this.toggle;
     }
   },
   created() {
@@ -114,14 +117,23 @@ p {
 .selectItin {
   text-align: center;
 }
-.result {
+#result {
   font-family: verdana;
   font-size: 18px;
-  text-align: center;
+  text-align: left;
   list-style-type: none;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px auto;
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
+  display: flex;
+  max-width: 500px;
+  justify-content: space-between;
+  align-self: center;
 }
+#result > a {
+  align-self: center;
+}
+
 .needToSearch {
   font-family: verdana;
   font-size: 25px;
@@ -135,14 +147,18 @@ p {
 }
 .addTo {
   display: inline;
+  
+}
+.addTo > div {
+  display: inline;
 }
 a {
   display: inline;
   text-decoration: none;
   text-transform: uppercase;
-  color:#515458;
+  color: #515458;
 }
 a:hover {
-  color:#03dbfc;
+  color: #03dbfc;
 }
 </style>
