@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "moment": "^2.24.0",
     "vue": "^2.6.10",
+    "vue-filter-date-format": "file:vue-filter-date-format",
+    "vue-filter-date-parse": "file:vue-filter-date-parse",
     "vue-router": "^3.0.3"
   },
   "devDependencies": {

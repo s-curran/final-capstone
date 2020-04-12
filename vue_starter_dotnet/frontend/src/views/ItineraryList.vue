@@ -5,21 +5,23 @@
         <h1 v-for="itin in itineraries" v-bind:key="itin.itineraryId" >
             <router-link :to="{ name: 'itinerary', params: { id: itin.itineraryId }}">{{itin.tourName}}</router-link>
         </h1>
-        <div></div>
+        <div id="space"></div>
+        <div class="btn">
     <button v-on:click.prevent="selectshow = true">Delete an Itinerary</button>
     <div v-if="selectshow === true">
       <SelectItin @selected="handleEvent"></SelectItin>
-      <button v-on:click.prevent="deleteItinerary" >Delete</button>
-      <button v-on:click.prevent="selectshow = false">Cancel</button>
-    </div>
 
-    <button  v-on:click.prevent="showform = true">Create a New Itinerary</button>
+      <button style="margin-left: 296px;"  v-on:click.prevent="deleteItinerary" >Delete</button>
+      <button class="cancel" v-on:click.prevent="selectshow = false">Cancel</button>
+    </div>
+    </div>
+    <div class="btn">
+    <button v-on:click.prevent="showform = true">Create a New Itinerary</button>
     <div v-if="showform === true">
-    <CreateItin ></CreateItin>
-    <button v-on:click.prevent="showform = false">Cancel</button>
+    <CreateItin v-on:click.prevent="reloadPage"></CreateItin>
+    <button class="cancel" v-on:click.prevent="showform = false">Cancel</button>
     </div>
-
-
+    </div>
     </div>
   </div>
 </template>
@@ -88,7 +90,6 @@ export default {
           Accept: "application/json",
           "Content-Type": "application/json"
         }),
-        // body: JSON.stringify(this.itin.itineraryId)
       })
         .then(response => {
           if (response.ok) {
@@ -98,13 +99,34 @@ export default {
           }
         })
         .catch(err => console.error(err));
-   
     },
-
+  reloadPage(){
+    window.location.reload()
+  }
   },
 };
 </script>
 
-<style>
+<style scoped>
+h1{
+  display: inline-block;
+  width: 50%;
+  margin: 0 25% 0 25%;
+  text-align: center;
+  padding: 8px;
+  border-bottom: solid;
+  border-width: 1px;
+  
 
+}
+.btn{
+  text-align: center;
+}
+.cancel{
+  color: red;
+  border-color: red;
+}
+#space{
+  padding: 20px;
+}
 </style>
