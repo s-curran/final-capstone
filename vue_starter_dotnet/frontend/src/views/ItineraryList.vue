@@ -9,9 +9,11 @@
         <div class="btn">
     <button v-on:click.prevent="selectshow = true">Delete an Itinerary</button>
     <div v-if="selectshow === true">
+      <div>
       <SelectItin @selected="handleEvent"></SelectItin>
 
-      <button style="margin-left: 296px;"  v-on:click.prevent="deleteItinerary" >Delete</button>
+      <button  v-on:click.prevent="deleteItinerary" >Delete</button>
+      </div>
       <button class="cancel" v-on:click.prevent="selectshow = false">Cancel</button>
     </div>
     </div>
@@ -98,6 +100,8 @@ export default {
             console.log("Could not delete itinerary");
           }
         })
+          .then(this.reloadPage())
+
         .catch(err => console.error(err));
     },
   reloadPage(){

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <select v-model='selected'>
-        Select Your Itinerary
+    <select v-model='selected' @click='selectItin'>
+        <option value="" disabled selected>Select your Itinerary</option>
       <option v-for="option in options" v-bind:key="option.itineraryId" v-bind:value="option.itineraryId">{{option.tourName}}</option>
     </select>
-    <button type='button' @click='selectItin'>Select</button>
+    <!-- <button type='button' @click='selectItin'>Select</button> -->
   </div>
 </template>
 
