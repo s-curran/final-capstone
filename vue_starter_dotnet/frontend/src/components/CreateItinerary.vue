@@ -47,8 +47,7 @@ export default {
               response.json()
               .then(json =>{
                   console.log(json)
-                  alert("Your itinerary has been created!!")
-                  
+                this.$emit("itinerary-added")
               })
           }
           else {

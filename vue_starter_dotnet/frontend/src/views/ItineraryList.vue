@@ -20,7 +20,7 @@
     <div class="btn">
     <button v-on:click.prevent="showform = true">Create a New Itinerary</button>
     <div v-if="showform === true">
-    <CreateItin v-on:click.prevent="reloadPage"></CreateItin>
+    <CreateItin @itinerary-added="itineraryAdded"></CreateItin>
     <button class="cancel" v-on:click.prevent="showform = false">Cancel</button>
     </div>
     </div>
@@ -95,17 +95,17 @@ export default {
       })
         .then(response => {
           if (response.ok) {
-            alert("Itinerary has been deleted");
+            this.getItineraries();
+            this.selectshow = false;
           } else {
             console.log("Could not delete itinerary");
           }
         })
-          .then(this.reloadPage())
-
         .catch(err => console.error(err));
     },
-  reloadPage(){
-    window.location.reload()
+  itineraryAdded(){
+    this.getItineraries();
+    this.showform = false;
   }
   },
 };
