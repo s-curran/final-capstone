@@ -1,5 +1,13 @@
 <template>
-  <div></div>
+  <div>
+      <div v-for="leg in trip" v-bind:key="leg.end_address">
+          <h3>{{leg.end_address}}</h3>
+          <h4>{{leg.duration.text}} - {{leg.distance.text}}</h4>
+          <ul>
+              <li v-for="step in leg.steps" v-bind:key="step.index" v-html="replaceText(step.html_instructions, step.distance.text)"></li>
+          </ul>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -31,11 +39,13 @@ export default {
           }
         })
         .then(json => {
-          this.trip = json;
+          this.trip = json.routes[0].legs;
         })
         .catch(err => console.error(err));
     },
-    
+    replaceText(string, distance) {
+        return `${string} - ${distance}`
+    },
   },
   created() {
       this.getDirections(this.$route.params.id)
