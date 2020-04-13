@@ -8,7 +8,7 @@
         <button type="button" @click="toggleForm">Create Itinerary</button>
       </div>
       <div v-else>
-        <create-itin class="create" ></create-itin>
+        <create-itin class="create" @itinerary-added="toggleForm"></create-itin>
       </div>
       <p>-OR-</p>
       <select-itin @selected="handleEvent" class="selectItin"></select-itin>
