@@ -8,6 +8,7 @@ import ExistingItinerary from './views/ExistingItinerary.vue'
 import Search from './components/Search.vue'
 import Detail from './views/Detail.vue'
 import ItineraryList from './views/ItineraryList.vue'
+import Directions from './views/Directions.vue'
 
 
 
@@ -83,6 +84,14 @@ const router = new Router({
       component: Search,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: "/directions/:id",
+      name: "directions",
+      component: Directions,
+      meta: {
+        requiresAuth: true
       }
     }
   ]
