@@ -51,6 +51,7 @@ getLandmark(id) {
     },
   handleEvent(selected) {
     this.itineraryId = selected;
+    alert("Location added");
   }
 },
 
