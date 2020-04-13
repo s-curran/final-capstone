@@ -37,7 +37,15 @@ namespace SampleApi.Controllers
 
             if (lastIndex > 1)
             {
-                url += $"&waypoints=place_id:";
+                string waypoints = "";
+                for (int i = 0; i <= lastIndex -3; i++)
+                {
+                    waypoints += $"place_id:{itinerary.Landmarks[i].LandmarkId}|";
+                }
+
+                waypoints += $"place_id:{itinerary.Landmarks[lastIndex - 2].LandmarkId}";
+
+                url += $"&waypoints={waypoints}";
             }
 
             string s = client.DownloadString(url);

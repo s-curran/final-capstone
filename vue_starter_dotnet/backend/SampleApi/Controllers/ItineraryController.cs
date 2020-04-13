@@ -91,7 +91,13 @@ namespace SampleApi.Controllers
             IList<Landmark> landmarks = itineraryDAO.getLandmarks();
             int orderNum = 1;
 
-            if(!landmarks.Contains(lm))
+            List<string> lmId = new List<string>();
+            foreach(Landmark land in landmarks)
+            {
+                lmId.Add(land.LandmarkId);
+            }
+            
+            if (!lmId.Contains(lm.LandmarkId))
             {
                 itineraryDAO.addLandmark(lm);
             }

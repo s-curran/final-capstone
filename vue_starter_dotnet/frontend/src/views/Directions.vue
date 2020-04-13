@@ -9,7 +9,7 @@ export default {
   name: "Directions",
   data() {
       return {
-          itinerary: []
+          trip: []
       }
   },
   methods: {
@@ -27,18 +27,18 @@ export default {
           if (response.ok) {
             return response.json();
           } else {
-            console.log("error fetching itinerary");
+            console.log("error fetching trip");
           }
         })
         .then(json => {
-          this.itinerary = json;
+          this.trip = json;
         })
         .catch(err => console.error(err));
     },
     
   },
   created() {
-      this.getDirections(this.$route.id)
+      this.getDirections(this.$route.params.id)
   }
 };
 </script>
