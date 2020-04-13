@@ -1,21 +1,25 @@
 <template>
-  <div>
+  <div class="display">
     <!-- get the list from backend for this user - loop through and display landmark names in order -->
+
     <h1>{{itinerary.tourName}}</h1>
-    <p>{{itinerary.dateOfTour}}</p>
-    <div v-for="landmark in itinerary.landmarks" v-bind:key="landmark.landmarkId">
-        <p>{{landmark.landmarkName}}</p> <button v-on:click="handleEvent(landmark.landmarkId)">Delete {{landmark.landmarkName}}from itinerary</button>
-    </div>
+    <p>{{getDate(itinerary.dateOfTour)}}</p>
+    <div class="OneLine" v-for="landmark in itinerary.landmarks" v-bind:key="landmark.landmarkId">
+        <p class="OneLine">{{landmark.landmarkName}}</p> <button class="OneLine" v-on:click="handleEvent(landmark.landmarkId)">Delete {{landmark.landmarkName}}from itinerary</button>
+        <br/>
+
     <!-- <Search></Search> -->
     <!-- <add :LandmarkId="landmark.place_id" :ItineraryId="itineraryId"></add> -->
 
     <!-- need button for edit itinerary and delete itinerary -->
+  </div>
   </div>
 </template>
 
 <script>
 import auth from '../auth'
 import Vue from 'vue';
+
 
 // import Add from '@/components/AddToItinerary.vue'
 // import Search from '@/components/Search.vue'
@@ -40,6 +44,7 @@ export default {
       };
     }
   },
+
   created(){
       this.getItinerary(this.$route.params.id);
   },
@@ -63,6 +68,10 @@ export default {
     };
   },
   methods: {
+    getDate(datetime) {
+      let date = new Date(datetime).toJSON().slice(0,10).replace(/-/g,'/')
+      return date
+    },
     deleteLandmark() {
       fetch(`${process.env.VUE_APP_REMOTE_API}/itinerary/remove?itineraryid=${this.ItineraryId}&landmarkid=${this.LandmarkId}`, {
          method: "DELETE",
@@ -76,7 +85,6 @@ export default {
         .then(response => {
           if (response.ok) {
             alert("Landmark has been deleted from itinerary");
-            Vue.$forceUpdate();
           } else {
             console.log("Could not delete landmark");
           }
@@ -109,9 +117,20 @@ export default {
         .catch((err) => console.error(err));
     }
   },
+    reloadPage(){
+    window.location.reload()
+  }
 };
 </script>
 
 <style>
+.display{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+
+}
+.OneLine{
+  display: inline;
+}
 
 </style>
