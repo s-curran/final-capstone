@@ -18,7 +18,7 @@
 
 <script>
 import auth from '../auth'
-import Vue from 'vue';
+// import Vue from 'vue';
 
 
 // import Add from '@/components/AddToItinerary.vue'
@@ -85,6 +85,8 @@ export default {
         .then(response => {
           if (response.ok) {
             alert("Landmark has been deleted from itinerary");
+            window.location.reload();
+
           } else {
             console.log("Could not delete landmark");
           }
