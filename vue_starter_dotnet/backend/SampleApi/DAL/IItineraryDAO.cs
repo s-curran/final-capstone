@@ -18,5 +18,8 @@ namespace SampleApi.DAL
         bool deleteItinerary(int itineraryId);
         bool removeLandmark(int itineraryId, string landmarkId);
         Landmark getLandmarkById(string landmarkId);
+        bool addRating(string landmarkId, double averageRating, int numberOfRatings);
+        Rating getRating(string landmarkId);
+
     }
 }

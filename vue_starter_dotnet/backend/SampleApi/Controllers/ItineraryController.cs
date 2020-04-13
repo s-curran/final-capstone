@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -173,6 +174,40 @@ namespace SampleApi.Controllers
             {
                 return BadRequest();
             }
+        }
+
+
+        [HttpPost("createRating")]
+        public IActionResult CreateRating(Landmark landmark, double averageRating, int numberOfRatings)
+        {
+            try
+            {
+                Landmark exisingLandmark = itineraryDAO.getLandmarkById(landmark.LandmarkId);
+            }
+            catch (SqlException)
+            {
+                itineraryDAO.addLandmark(landmark);
+                Landmark exisingLandmark = itineraryDAO.getLandmarkById(landmark.LandmarkId);
+            }
+            bool added = itineraryDAO.addRating(landmark.LandmarkId, averageRating, numberOfRatings);
+            if (added)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+
+
+        }
+        [HttpGet("getRating")]
+        public IActionResult getRating(string placeId)
+        {
+            Rating rating = itineraryDAO.getRating(placeId);
+
+            return Ok(rating);
         }
     }
 }

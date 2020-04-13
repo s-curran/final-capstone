@@ -35,5 +35,6 @@ namespace SampleApi.Controllers
             string s = client.DownloadString(url);
             return new ContentResult() { Content = s };
         }
+
     }
 }

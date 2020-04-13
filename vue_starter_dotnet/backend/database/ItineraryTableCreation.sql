@@ -13,6 +13,8 @@ create table Landmark (
 	LandmarkID nvarchar(150) Primary Key not null,
 	LandmarkName nvarchar(150) not null,
 	LandmarkAddress nvarchar(150) not null,
+	AverageRating float null,
+	NumberOfRatings int null,
 )
 
 create table LandmarkItinerary (
@@ -25,3 +27,11 @@ create table LandmarkItinerary (
 )
 
 Commit Transaction
+
+
+ALTER TABLE Landmark
+ADD AverageRating float null;
+
+ALTER TABLE Landmark
+ADD NumberOfRatings int null;
+

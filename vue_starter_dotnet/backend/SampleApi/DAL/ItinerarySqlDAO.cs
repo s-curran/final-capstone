@@ -74,6 +74,69 @@ namespace SampleApi.DAL
             }
             return false;
         }
+        public bool addRating(string landmarkId, double averageRating, int numberOfRatings)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = @"
+                                    UPDATE Landmark
+                                    SET  AverageRating= @avgRating, NumberOfRatings= @numRatings
+                                    WHERE LandmarkID = @Id;";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@landmarkId", landmarkId);
+                    cmd.Parameters.AddWithValue("@avgRating", averageRating);
+                    cmd.Parameters.AddWithValue("@numRatings", numberOfRatings);
+                   
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return false;
+        }
+        public Rating getRating(string landmarkId)
+        {
+            Rating rating = new Rating();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = @"Select AverageRating, NumberOfRatings 
+                                   FROM landmark 
+                                   WHERE LandmarkID = @ID;";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@ID", landmarkId);
+
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        rating.AverageRating = Convert.ToDouble(rdr["AverageRating"]);
+                        rating.NumberOfRatings = Convert.ToInt32(rdr["NumberOfRatings"]);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rating;
+        }
         public IList<Landmark> getLandmarks()
         {
             IList<Landmark> landmarks = new List<Landmark>();
