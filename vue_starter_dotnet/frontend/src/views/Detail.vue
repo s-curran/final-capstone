@@ -2,7 +2,6 @@
     <div id="detail">
       <h1 class="heading"> Site Details </h1>
       <h3 class="itemDetails">Name of Attraction: {{landmark.name}}</h3>
-      <h3 class="itemDetails">Open Now: {{landmark.open_now == "true" ? "Yes" : "No" }}</h3>
       <h3 class="itemDetails">Phone Number: {{landmark.international_phone_number}}</h3>
       <h3 class="itemDetails">Address: {{landmark.vicinity}}</h3>
       <h3 class="itemDetails">Composite Rating (out of 5): {{landmark.rating}}</h3>
