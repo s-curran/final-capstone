@@ -97,7 +97,7 @@ getLandmark(id) {
     },
   handleEvent(selected) {
     this.itineraryId = selected;
-    alert("Location added");
+    // alert("Location added");
   },
   getCRating(id) {
             let url = `${process.env.VUE_APP_REMOTE_API}/itinerary/getRating?placeId=${id}`
