@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>{{ this.trip[0].start_address}}</h3>
+    <h2 id="start">{{ this.trip[0].start_address}}</h2>
     <div v-for="leg in trip" v-bind:key="leg.end_address">
       <h4>{{leg.duration.text}} - {{leg.distance.text}}</h4>
       <ul>
@@ -15,7 +15,7 @@
     <div v-for="landmark in landmarks" v-bind:key="landmark.landmarkId">
     <h3 v-if="landmark.landmarkAddress.substring(0,4) === leg.end_address.substring(0,4)">{{landmark.landmarkName}}</h3>
     </div>
-      <h3>{{leg.end_address}}</h3>
+      <h2>{{leg.end_address}}</h2>
     </div>
   </div>
 </template>
@@ -103,6 +103,14 @@ ul {
 }
 li {
   margin-bottom: 10px;
+}
+h2{
+  font-size: 20px;
+}
+#start{
+  background: lightgrey;
+  font-size: 20px;
+
 }
 h3 {
   background: #515458;
