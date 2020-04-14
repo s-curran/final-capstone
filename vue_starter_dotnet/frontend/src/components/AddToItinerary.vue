@@ -14,8 +14,8 @@ export default {
       LandmarkId: String,
       LandmarkName: String,
       LandmarkAddress: String,
-   
-    ItineraryId: Number
+      ItineraryId: Number,
+       
   },
   computed: {
     item: function() {
