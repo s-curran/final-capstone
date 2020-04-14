@@ -48,7 +48,7 @@ export default {
       // long: "-81.691498",
       radius: "",
       type: "",
-      opennow: "",
+      opennow: "false",
       key: "AIzaSyANWIg-qW05HeNmXG2Yh1Fd7w8I9w4WXto",
       results: [],
       city: ""
