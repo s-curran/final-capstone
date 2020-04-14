@@ -110,7 +110,7 @@ button:hover {
   color: #03dbfc;
   border-color: #03dbfc;
 }
-button:active {
+button:focus {
   color: #03dbfc;
   border-color: #03dbfc;
 }
