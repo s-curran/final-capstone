@@ -186,15 +186,19 @@ namespace SampleApi.Controllers
         [HttpPost("createRating")]
         public IActionResult CreateRating(Landmark landmark, double averageRating, int numberOfRatings)
         {
-            try
+            IList<Landmark> landmarks = itineraryDAO.getLandmarks();
+
+            List<string> lmId = new List<string>();
+            foreach (Landmark land in landmarks)
             {
-                Landmark exisingLandmark = itineraryDAO.getLandmarkById(landmark.LandmarkId);
+                lmId.Add(land.LandmarkId);
             }
-            catch (SqlException)
+
+            if (!lmId.Contains(landmark.LandmarkId))
             {
                 itineraryDAO.addLandmark(landmark);
-                Landmark exisingLandmark = itineraryDAO.getLandmarkById(landmark.LandmarkId);
             }
+
             bool added = itineraryDAO.addRating(landmark.LandmarkId, averageRating, numberOfRatings);
             if (added)
             {
@@ -204,10 +208,8 @@ namespace SampleApi.Controllers
             {
                 return BadRequest();
             }
-
-
-
         }
+
         [HttpGet("getRating")]
         public IActionResult getRating(string placeId)
         {

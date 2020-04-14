@@ -1,12 +1,11 @@
 <template>
     <div id="detail">
-      <h1 class="heading"> Site Details </h1>
-      <h3 class="itemDetails">Name of Attraction: {{landmark.name}}</h3>
-      <h3 class="itemDetails">Phone Number: {{landmark.international_phone_number}}</h3>
-      <h3 class="itemDetails">Address: {{landmark.vicinity}}</h3>
-      <h3 class="itemDetails">Composite Rating (out of 5): {{landmark.rating}}</h3>
-      <h3 class="itemDetails">Total number of ratings to date: {{landmark.user_ratings_total}}</h3>
-      <h3 class="itemDetails">Website:  {{landmark.website}}</h3>
+      <h1 class="itemDetails">{{landmark.name}}</h1>
+      <h3 class="itemDetails">{{landmark.vicinity}}</h3>
+      <h3 class="itemDetails">{{landmark.international_phone_number}}</h3>
+      <h3 class="itemDetails">{{landmark.website}}</h3>
+      <h3 class="itemDetails">Rating: {{correctRating}} out of 5 ({{landmark.user_ratings_total}} ratings)</h3>
+      
       
       <select-itin @selected="handleEvent"></select-itin>
         <add :LandmarkId="landmark.place_id" :LandmarkName="landmark.name" :LandmarkAddress="landmark.vicinity" :ItineraryId="itineraryId"></add>
@@ -16,6 +15,7 @@
 <script>
 import Add from '@/components/AddToItinerary.vue'
 import SelectItin from '@/components/SelectItinerary.vue'
+import auth from "../auth";
 
 export default {
 name: "Detail",
@@ -26,8 +26,26 @@ components: {
 data() {
    return {
      itineraryId: '',
-     landmark : {}
+     landmark : {},
+     cRating: {},
+     apiRating: '',
+    //  correctRating: '',
     }
+},
+computed:{
+      correctRating: function() {
+       let correctRating;
+       if(this.cRating != null)
+        {
+          correctRating = this.cRating; 
+        }
+        else{
+          correctRating = this.apiRating;
+        }
+     return correctRating;
+      
+      
+}
 },
 methods: {
 getLandmark(id) {
@@ -52,7 +70,48 @@ getLandmark(id) {
   handleEvent(selected) {
     this.itineraryId = selected;
     alert("Location added");
+  },
+  getCRating() {
+            let url = `${process.env.VUE_APP_REMOTE_API}/itinerary/getRating?placeId=${this.landmark.LandmarkId}`
+ 
+            fetch(url, {
+                method: "GET",          
+                headers: new Headers({
+            Authorization: "Bearer " + auth.getToken(),
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }),
+            })
+            .then(response => {
+                if(response.ok) {
+                    response.json()
+                    .then(json => {
+                        this.cRating = json;
+                    })
+                } else {
+                    console.log('Could not get itineraries')
+                }
+            })
+            .catch(err => console.error(err))
+        },
+  getApiRating(landmark){
+    this.apiRating = landmark.rating;
+  },
+  displayCorrectRating(apiRating, cRating){
+      if(cRating.AverageRating != null)
+      {
+        this.correctRating = cRating.AverageRating;
+      }
+      else
+      {
+        this.correctRating = apiRating;
+      }
+  
+          console.log(this.cRating.AverageRating);
+    console.log(this.apiRating);
+    console.log(this.correctRatingRating);
   }
+
 },
 
   
@@ -60,6 +119,16 @@ getLandmark(id) {
 
 created () {
     this.getLandmark(this.$route.params.id);
+    // this.getCRating();
+    // this.getApiRating(this.landmark);
+    // this.displayCorrectRating(this.apiRating, this.cRating);
+},
+
+mounted () {
+    // this.getLandmark(this.$route.params.id);
+    this.getCRating();
+    this.getApiRating(this.landmark);
+    // this.displayCorrectRating(this.apiRating, this.cRating);
 }
 }
 </script>
