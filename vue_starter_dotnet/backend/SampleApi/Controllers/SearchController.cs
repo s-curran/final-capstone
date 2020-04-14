@@ -36,5 +36,16 @@ namespace SampleApi.Controllers
             return new ContentResult() { Content = s };
         }
 
+        [HttpGet("address")]
+        public IActionResult Address(string address)
+        {
+            address = address.Replace(" ", "+");
+
+            WebClient client = new WebClient();
+            string url = $"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={address}&inputtype=textquery&key=AIzaSyANWIg-qW05HeNmXG2Yh1Fd7w8I9w4WXto";
+
+            string s = client.DownloadString(url);
+            return new ContentResult() { Content = s };
+        }
     }
 }
