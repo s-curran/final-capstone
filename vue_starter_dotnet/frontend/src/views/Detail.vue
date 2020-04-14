@@ -35,12 +35,12 @@ data() {
 computed:{
       correctRating: function() {
        let correctRating;
-       if(this.cRating != null)
+       if(this.cRating.averageRating != null)
         {
-          correctRating = this.cRating; 
+          correctRating = this.cRating.averageRating; 
         }
         else{
-          correctRating = this.apiRating;
+          correctRating = this.landmark.rating;
         }
      return correctRating;
       
@@ -65,14 +65,17 @@ getLandmark(id) {
             this.landmark = json.result;
           }
         )
+        // .then((landmark) =>{
+        //     this.getCRating(landmark);
+        // })
         .catch((err) => console.error(err));
     },
   handleEvent(selected) {
     this.itineraryId = selected;
     alert("Location added");
   },
-  getCRating() {
-            let url = `${process.env.VUE_APP_REMOTE_API}/itinerary/getRating?placeId=${this.landmark.LandmarkId}`
+  getCRating(id) {
+            let url = `${process.env.VUE_APP_REMOTE_API}/itinerary/getRating?placeId=${id}`
  
             fetch(url, {
                 method: "GET",          
@@ -119,15 +122,15 @@ getLandmark(id) {
 
 created () {
     this.getLandmark(this.$route.params.id);
-    // this.getCRating();
+    this.getCRating(this.$route.params.id);
     // this.getApiRating(this.landmark);
     // this.displayCorrectRating(this.apiRating, this.cRating);
 },
 
 mounted () {
     // this.getLandmark(this.$route.params.id);
-    this.getCRating();
-    this.getApiRating(this.landmark);
+    // this.getCRating();
+    // this.getApiRating(this.landmark);
     // this.displayCorrectRating(this.apiRating, this.cRating);
 }
 }
