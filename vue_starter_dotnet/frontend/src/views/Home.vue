@@ -34,7 +34,7 @@
       </ul>
     </div>
     <div v-else>
-      <h3 class="needToSearch">Enter a city above to view landmarks!</h3>
+      <h3 class="needToSearch">Enter a location above to view landmarks!</h3>
     </div>
   </div>
 </template>
