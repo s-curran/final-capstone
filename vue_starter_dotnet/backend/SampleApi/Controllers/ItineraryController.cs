@@ -184,7 +184,7 @@ namespace SampleApi.Controllers
 
 
         [HttpPost("createRating")]
-        public IActionResult CreateRating(Landmark landmark, double averageRating, int numberOfRatings)
+        public IActionResult CreateRating(NewRatingVM vm)
         {
             IList<Landmark> landmarks = itineraryDAO.getLandmarks();
 
@@ -194,12 +194,12 @@ namespace SampleApi.Controllers
                 lmId.Add(land.LandmarkId);
             }
 
-            if (!lmId.Contains(landmark.LandmarkId))
+            if (!lmId.Contains(vm.landmarkVM.LandmarkId))
             {
-                itineraryDAO.addLandmark(landmark);
+                itineraryDAO.addLandmark(vm.landmarkVM);
             }
 
-            bool added = itineraryDAO.addRating(landmark.LandmarkId, averageRating, numberOfRatings);
+            bool added = itineraryDAO.addRating(vm.landmarkVM.LandmarkId, vm.newAverageRating, vm.newNumberOfRatings);
             if (added)
             {
                 return Ok();

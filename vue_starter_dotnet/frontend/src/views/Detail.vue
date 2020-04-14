@@ -4,7 +4,8 @@
       <h3 class="itemDetails">{{landmark.vicinity}}</h3>
       <h3 class="itemDetails">{{landmark.international_phone_number}}</h3>
       <h3 class="itemDetails">{{landmark.website}}</h3>
-      <h3 class="itemDetails">Rating: {{correctRating}} out of 5 ({{landmark.user_ratings_total}} ratings)</h3>
+      <h3 class="itemDetails">Rating: {{correctRating}} out of 5 ({{correctNumRatings}} ratings)</h3>
+      <button v-on:click="addRating">Add Rating</button>
       
       
       <select-itin @selected="handleEvent"></select-itin>
@@ -33,6 +34,8 @@ data() {
     }
 },
 computed:{
+
+
       correctRating: function() {
        let correctRating;
        if(this.cRating.averageRating != null)
@@ -44,8 +47,30 @@ computed:{
         }
      return correctRating;
       
-      
-}
+},
+      correctNumRatings: function() {
+       let correctNumRatings;
+       if(this.cRating.numberOfRatings != null)
+        {
+          correctNumRatings = this.cRating.numberOfRatings;
+        }
+        else{
+          correctNumRatings = this.landmark.user_ratings_total;
+        }
+     return correctNumRatings;
+      },
+
+       newRatingInput: function() {
+      return {
+        landmarkVM: {
+            LandmarkId: this.landmark.place_id,
+            LandmarkName: this.landmark.name,
+            LandmarkAddress: this.landmark.vicinity,
+        },
+        newAverageRating: 4,
+        newNumberOfRatings: 2,
+      };
+    }
 },
 methods: {
 getLandmark(id) {
@@ -97,7 +122,30 @@ getLandmark(id) {
             })
             .catch(err => console.error(err))
         },
-  getApiRating(landmark){
+          addRating() {
+            let url = `${process.env.VUE_APP_REMOTE_API}/itinerary/createRating`
+ 
+            fetch(url, {
+                method: "POST",          
+                headers: new Headers({
+            Authorization: "Bearer " + auth.getToken(),
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }),
+                body: JSON.stringify(this.newRatingInput)
+
+            })
+            .then(response => {
+                if (response.ok) {
+                alert("Rating has been posted!");
+                } else {
+                console.log("Could not add rating");
+                }
+            })
+            .catch(err => console.error(err))
+        },
+
+    finalAddRating(landmark){
     this.apiRating = landmark.rating;
   },
   displayCorrectRating(apiRating, cRating){

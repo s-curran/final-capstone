@@ -85,7 +85,7 @@ namespace SampleApi.DAL
                     string sql = @"
                                     UPDATE Landmark
                                     SET  AverageRating= @avgRating, NumberOfRatings= @numRatings
-                                    WHERE LandmarkID = @Id;";
+                                    WHERE LandmarkID = @landmarkId;";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@landmarkId", landmarkId);
