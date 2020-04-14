@@ -5,8 +5,8 @@
     <h1>{{itinerary.tourName}}</h1>
     <p>{{getDate(itinerary.dateOfTour)}}</p>
     <div class="OneLine" v-for="landmark in itinerary.landmarks" v-bind:key="landmark.landmarkId">
-        <p class="OneLine">{{landmark.landmarkName}}  </p> <button class="OneLine" v-on:click="handleEvent(landmark.landmarkId)">Delete </button>
-        <br/>
+       <router-link :to="{name:'detail', params:{id:landmark.landmarkId}}"> <p class="OneLine">{{landmark.landmarkName}}  </p> <button class="OneLine" v-on:click="handleEvent(landmark.landmarkId)">Delete </button>
+        <br/></router-link>
 
     <!-- <Search></Search> -->
     <!-- <add :LandmarkId="landmark.place_id" :ItineraryId="itineraryId"></add> -->

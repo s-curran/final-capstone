@@ -126,8 +126,17 @@ namespace SampleApi.DAL
 
                     while (rdr.Read())
                     {
-                        rating.AverageRating = Convert.ToDouble(rdr["AverageRating"]);
-                        rating.NumberOfRatings = Convert.ToInt32(rdr["NumberOfRatings"]);
+                        if(rdr["AverageRating"] == System.DBNull.Value)
+                        {
+                            rating.AverageRating = null;
+                            rating.NumberOfRatings = null;
+                        }
+                        else
+                        {
+                            rating.AverageRating = Convert.ToDouble(rdr["AverageRating"]);
+                            rating.NumberOfRatings = Convert.ToInt32(rdr["NumberOfRatings"]);
+                        }
+                        
                     }
                 }
             }
