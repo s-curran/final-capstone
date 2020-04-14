@@ -7,9 +7,10 @@
       <h3 class="itemDetails">Rating: {{correctRating}} out of 5 ({{correctNumRatings}} ratings)</h3>
       <button v-on:click="addRating">Add Rating</button>
       
-      
+      <div v-if="user">
       <select-itin @selected="handleEvent"></select-itin>
         <add :LandmarkId="landmark.place_id" :LandmarkName="landmark.name" :LandmarkAddress="landmark.vicinity" :ItineraryId="itineraryId"></add>
+      </div>
     </div>
 </template>
 
@@ -30,6 +31,7 @@ data() {
      landmark : {},
      cRating: {},
      apiRating: '',
+     user: null,
     //  correctRating: '',
     }
 },
@@ -73,6 +75,7 @@ computed:{
     }
 },
 methods: {
+
 getLandmark(id) {
       fetch(`${process.env.VUE_APP_REMOTE_API}/search/place?placeid=${id}`, {
         method: 'GET'
@@ -171,6 +174,7 @@ getLandmark(id) {
 created () {
     this.getLandmark(this.$route.params.id);
     this.getCRating(this.$route.params.id);
+    this.user = auth.getUser();
     // this.getApiRating(this.landmark);
     // this.displayCorrectRating(this.apiRating, this.cRating);
 },
