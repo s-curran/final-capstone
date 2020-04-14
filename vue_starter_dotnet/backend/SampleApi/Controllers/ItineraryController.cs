@@ -213,8 +213,26 @@ namespace SampleApi.Controllers
         [HttpGet("getRating")]
         public IActionResult getRating(string placeId)
         {
-            Rating rating = itineraryDAO.getRating(placeId);
+            Rating rating;
+            IList<Landmark> landmarks = itineraryDAO.getLandmarks();
 
+            List<string> lmId = new List<string>();
+            foreach (Landmark land in landmarks)
+            {
+                lmId.Add(land.LandmarkId);
+            }
+
+            if (!lmId.Contains(placeId))
+            {
+                rating = new Rating();
+                rating.AverageRating = null;
+                rating.NumberOfRatings = null;
+            }
+            else
+            {
+                rating = itineraryDAO.getRating(placeId);
+
+            }
             return Ok(rating);
         }
     }
