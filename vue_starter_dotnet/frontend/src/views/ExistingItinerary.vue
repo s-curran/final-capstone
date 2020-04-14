@@ -5,7 +5,7 @@
     <h1>{{itinerary.tourName}}</h1>
     <p>{{getDate(itinerary.dateOfTour)}}</p>
     <div class="OneLine" v-for="landmark in itinerary.landmarks" v-bind:key="landmark.landmarkId">
-        <p class="OneLine">{{landmark.landmarkName}}</p> <button class="OneLine" v-on:click="handleEvent(landmark.landmarkId)">Delete {{landmark.landmarkName}}from itinerary</button>
+        <p class="OneLine">{{landmark.landmarkName}}  </p> <button class="OneLine" v-on:click="handleEvent(landmark.landmarkId)">Delete </button>
         <br/>
 
     <!-- <Search></Search> -->
@@ -18,6 +18,7 @@
 
 <script>
 import auth from '../auth'
+
 // import Vue from 'vue';
 
 
@@ -96,6 +97,7 @@ export default {
       handleEvent(id) {
     this.landmarkid = id;
     this.deleteLandmark();
+    this.itinerary.dateOfTour = '';
   },
     getItinerary(itineraryid) {      
       fetch(`${process.env.VUE_APP_REMOTE_API}/itinerary/display?itineraryId=${itineraryid}`, {
