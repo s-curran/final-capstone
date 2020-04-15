@@ -4,16 +4,29 @@
 
     <h1>{{itinerary.tourName}}</h1>
     <p>{{getDate(itinerary.dateOfTour)}}</p>
+    <p id="start">Starting address: {{itinerary.startPoint}}</p>
     <div class="OneLine" v-for="landmark in itinerary.landmarks" v-bind:key="landmark.landmarkId">
-       <router-link :to="{name:'detail', params:{id:landmark.landmarkId}}"> <p class="OneLine">{{landmark.landmarkName}}  </p> <button class="OneLine" v-on:click="handleEvent(landmark.landmarkId)">Delete </button>
-        <br/></router-link>
+    <router-link :to="{name:'detail', params:{id:landmark.landmarkId}}"> 
+    <ul>
+    <li class="OneLine">{{landmark.landmarkName}}</li> 
+    </ul> </router-link> 
+    <button v-if="editshow === true" class="OneLine" v-on:click="handleEvent(landmark.landmarkId)">Delete </button>
+    <br/>
 
     <!-- <Search></Search> -->
     <!-- <add :LandmarkId="landmark.place_id" :ItineraryId="itineraryId"></add> -->
 
     <!-- need button for edit itinerary and delete itinerary -->
   </div>
+      <router-link :to="{ name: 'directions', params: { id: itinerary.itineraryId }}"><button>Get Optimized Route Directions</button></router-link>
+    <div>
+      <button v-on:click.prevent="editshow = true">Delete Landmarks from Itinerary</button>
+      <!-- TODO: need this router to keep the itinerary and select it for user -->
+      <router-link :to="{name:'home', params:{id:itineraryId}}">
+      <button>Add Landmarks to Itinerary</button></router-link>
+    </div>
   </div>
+  
 </template>
 
 <script>
@@ -48,10 +61,11 @@ export default {
 
   created(){
       this.getItinerary(this.$route.params.id);
+      this.selectedItinerary();
   },
   data() {
     return {
-      
+      editshow: false,
       itinerary: {
           itineraryId: '',
           userId: '',
@@ -85,8 +99,7 @@ export default {
       })
         .then(response => {
           if (response.ok) {
-            alert("Landmark has been deleted from itinerary");
-            window.location.reload();
+          this.getItinerary(this.$route.params.id);
 
           } else {
             console.log("Could not delete landmark");
@@ -127,12 +140,42 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#start{
+  display: inline-block;
+  width: 50%;
+  margin: 0 25% 0 25%;
+  text-align: center;
+  padding: 8px;
+  border-bottom: solid;
+  border-width: 1px;
+  margin-bottom: 5%;
+  text-transform: uppercase;
+
+}
+h1{
+  display: inline-block;
+  width: 50%;
+  margin: 0 25% 0 25%;
+  text-align: center;
+  padding: 8px;
+  border-bottom: solid;
+  border-width: 1px;
+  text-transform: uppercase;
+}
+ul {
+  justify-content: center;
+  display: grid;
+  font-size: 18px;
+  margin-bottom: 0px;
+}
+
 .display{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
 
 }
+
 .OneLine{
   display: inline;
 }

@@ -11,7 +11,8 @@
         <create-itin class="create" @itinerary-added="toggleForm"></create-itin>
       </div>
       <p>-OR-</p>
-      <select-itin @selected="handleEvent" class="selectItin"></select-itin>
+      <select-itin  @selected="handleEvent" class="selectItin"></select-itin>
+
     </div>
     <div v-if="searchResults.length >=1">
       <h3 class="listTitle">Landmarks to visit {{cityName}}:</h3>

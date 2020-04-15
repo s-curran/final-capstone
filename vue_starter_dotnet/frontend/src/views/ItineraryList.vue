@@ -12,7 +12,7 @@
       <div>
       <SelectItin @selected="handleEvent"></SelectItin>
 
-      <button  v-on:click.prevent="deleteItinerary" >Delete</button>
+      <button v-on:click.prevent="deleteItinerary" >Delete</button>
       </div>
       <button class="cancel" v-on:click.prevent="selectshow = false">Cancel</button>
     </div>
@@ -120,8 +120,6 @@ h1{
   padding: 8px;
   border-bottom: solid;
   border-width: 1px;
-  
-
 }
 .btn{
   text-align: center;
