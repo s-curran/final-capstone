@@ -20,6 +20,7 @@ namespace SampleApi.DAL
         Landmark getLandmarkById(string landmarkId);
         bool addRating(string landmarkId, double averageRating, int numberOfRatings);
         Rating getRating(string landmarkId);
+        bool updateStartingPoint(int itineraryId, string newStartingPoint);
 
     }
 }

@@ -11,6 +11,8 @@
     <li class="OneLine">{{landmark.landmarkName}}</li> 
     </ul> </router-link> 
     <button v-if="editshow === true" class="OneLine" v-on:click="handleEvent(landmark.landmarkId)">Delete </button>
+   
+    
     <br/>
 
     <!-- <Search></Search> -->
@@ -23,8 +25,17 @@
       <button v-if="!editshow" v-on:click.prevent="editshow = true">Delete Landmarks from Itinerary</button>
       <button v-if="editshow" v-on:click.prevent="editshow = false">Cancel</button>
       <!-- TODO: need this router to keep the itinerary and select it for user -->
+      <br/>
       <router-link :to="{path:`/home/${itinerary.itineraryId}`}">
+     
       <button>Add Landmarks to Itinerary</button></router-link>
+
+      <br/>
+       <label >Change your starting point:</label>
+       <br/>
+        <input  type='text' v-model="changedAddress"/>
+        <br/>
+        <button type="submit" value="Submit" v-on:click="updateStartingPoint">Submit</button>  
     </div>
   </div>
   
@@ -57,6 +68,13 @@ export default {
         LandmarkId: this.landmarkid,
         ItineraryId: this.itinerary.itineraryId,
       };
+    },
+    changeStart: function() {
+      return {
+        itineraryId: this.itinerary.itineraryId,
+        newStartingPoint: this.changedAddress,
+    
+      };
     }
   },
 
@@ -67,6 +85,7 @@ export default {
   data() {
     return {
       editshow: false,
+      changedAddress: '',
       itinerary: {
           itineraryId: '',
           userId: '',
@@ -84,6 +103,32 @@ export default {
     };
   },
   methods: {
+     updateStartingPoint() {
+            let url = `${process.env.VUE_APP_REMOTE_API}/itinerary/updateStart`
+ 
+            fetch(url, {
+                method: "POST",          
+                headers: new Headers({
+            Authorization: "Bearer " + auth.getToken(),
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }),
+                body: JSON.stringify(this.changeStart)
+
+            })
+            .then(response => {
+                if (response.ok) {
+                alert("Starting location has been updated!");
+                window.location.reload();
+                // this.getLandmark(this.$route.params.id);
+                // this.getCRating(this.$route.params.id);
+                // this.user = auth.getUser();
+                } else {
+                console.log("Could not update starting location");
+                }
+            })
+            .catch(err => console.error(err))
+        },
     getDate(datetime) {
       let date = new Date(datetime).toJSON().slice(0,10).replace(/-/g,'/')
       return date

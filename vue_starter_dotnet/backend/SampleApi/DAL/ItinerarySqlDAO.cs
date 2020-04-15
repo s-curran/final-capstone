@@ -43,6 +43,40 @@ namespace SampleApi.DAL
             }
 
         }
+        public bool updateStartingPoint(int itineraryId, string newStartingPoint)
+        {
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = @" UPDATE itinerary
+                                    SET StartPoint = @newStartingPoint
+                                    WHERE ItineraryID = @itineraryId
+                                    ";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@newStartingPoint", newStartingPoint);
+                    cmd.Parameters.AddWithValue("@itineraryId", itineraryId);
+
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return false;
+        }
+
 
         public bool addLandmark(Landmark landmark)
         {

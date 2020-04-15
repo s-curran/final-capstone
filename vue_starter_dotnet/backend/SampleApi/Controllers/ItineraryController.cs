@@ -56,6 +56,22 @@ namespace SampleApi.Controllers
             return Ok(itineraryId);
         }
 
+        [HttpPost("updateStart")]
+        [Authorize]
+        public IActionResult UpdateStart(ChangeStartVM vm)
+        {
+            bool updateSuccess = itineraryDAO.updateStartingPoint(vm.itineraryId, vm.newStartingPoint);
+
+            if (updateSuccess)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
         /// <summary>
         /// Retrieves an itinerary for the user
         /// </summary>
