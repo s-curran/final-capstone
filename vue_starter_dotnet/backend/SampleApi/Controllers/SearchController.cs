@@ -39,10 +39,14 @@ namespace SampleApi.Controllers
         [HttpGet("address")]
         public IActionResult Address(string address)
         {
+            if(address == null)
+            {
+                return Ok();
+            }
             address = address.Replace(" ", "+");
 
             WebClient client = new WebClient();
-            string url = $"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={address}&inputtype=textquery&key=AIzaSyANWIg-qW05HeNmXG2Yh1Fd7w8I9w4WXto";
+            string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyANWIg-qW05HeNmXG2Yh1Fd7w8I9w4WXto";
 
             string s = client.DownloadString(url);
             return new ContentResult() { Content = s };

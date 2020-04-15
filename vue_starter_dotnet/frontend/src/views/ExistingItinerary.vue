@@ -19,16 +19,17 @@
     <!-- <add :LandmarkId="landmark.place_id" :ItineraryId="itineraryId"></add> -->
 
     <!-- need button for edit itinerary and delete itinerary -->
-  </div>
-      <router-link :to="{ name: 'directions', params: { id: itinerary.itineraryId }}"><button>Get Optimized Route Directions</button></router-link>
-    <div>
-      <button v-if="!editshow" v-on:click.prevent="editshow = true">Delete Landmarks from Itinerary</button>
+  </div><br/><br/>
+      <router-link :to="{ name: 'directions', params: { id: itinerary.itineraryId }}"><button>Directions</button></router-link>
+      <button @click="toggleEdit">Edit</button>
+    <div v-if="toggle">
+      <button v-if="!editshow" v-on:click.prevent="editshow = true">Delete From</button>
       <button v-if="editshow" v-on:click.prevent="editshow = false">Cancel</button>
       <!-- TODO: need this router to keep the itinerary and select it for user -->
       <br/>
       <router-link :to="{path:`/home/${itinerary.itineraryId}`}">
      
-      <button>Add Landmarks to Itinerary</button></router-link>
+      <button>Add To</button></router-link>
 
       <br/>
        <label >Change your starting point:</label>
@@ -85,6 +86,7 @@ export default {
   data() {
     return {
       editshow: false,
+      toggle: false,
       changedAddress: '',
       itinerary: {
           itineraryId: '',
@@ -103,6 +105,9 @@ export default {
     };
   },
   methods: {
+    toggleEdit() {
+      this.toggle = !this.toggle;
+    },
      updateStartingPoint() {
             let url = `${process.env.VUE_APP_REMOTE_API}/itinerary/updateStart`
  
@@ -195,7 +200,7 @@ export default {
   padding: 8px;
   border-bottom: solid;
   border-width: 1px;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
   text-transform: uppercase;
 
 }
@@ -214,11 +219,13 @@ ul {
   display: grid;
   font-size: 18px;
   margin-bottom: 0px;
+  padding-left: 0px;
 }
 
 .display{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
+    margin-bottom: 20px;
 
 }
 

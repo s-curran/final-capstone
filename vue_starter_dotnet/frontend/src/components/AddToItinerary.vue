@@ -42,9 +42,10 @@ export default {
       })
         .then(response => {
           if (response.ok) {
+            
             alert("Landmark has been added to itinerary");
           } else {
-            console.log("Could not add landmark");
+            alert("Landmark already in itinerary");
           }
         })
         .catch(err => console.error(err));

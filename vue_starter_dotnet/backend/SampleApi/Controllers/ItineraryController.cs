@@ -119,7 +119,20 @@ namespace SampleApi.Controllers
             }
             Landmark landmark = itineraryDAO.getLandmarkById(vm.LandmarkId);
 
-            bool added = itineraryDAO.addToItinerary(vm.ItineraryId, orderNum, landmark);
+
+            IList<Landmark> existingLandmarks = itineraryDAO.getItinerary(vm.ItineraryId);
+            IList<string> existingIds = new List<string>();
+
+            foreach(Landmark l in existingLandmarks)
+            {
+                existingIds.Add(l.LandmarkId);
+            }
+
+            bool added = false;
+            if (!existingIds.Contains(landmark.LandmarkId))
+            {
+                added = itineraryDAO.addToItinerary(vm.ItineraryId, orderNum, landmark);
+            }
 
             if (added)
             {
