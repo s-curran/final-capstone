@@ -117,7 +117,11 @@ export default {
 </script>
 
 <style>
-button.search {
+button.search{
+    width: 300px;
+
+}
+button {
   display: inline-block;
   padding: 0.5em 3em;
   border: 0.16em solid #515458;
@@ -132,7 +136,6 @@ button.search {
   text-align: center;
   transition: all 0.15s;
   background-color: white;
-  width: 300px;
 }
 button:hover {
   color: #03dbfc;
