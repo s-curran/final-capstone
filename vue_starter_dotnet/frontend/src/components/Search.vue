@@ -3,7 +3,11 @@
     <!-- <input type="text" placeholder="Enter your city..." v-model="city" /> -->
     <br />
 
-    <button type="button" @click="getLocation">Allow Access to Your Location</button>
+    <button
+      type="button"
+      @click="getLocation"
+      v-bind:class="{locationAccessed: lat}"
+    >Allow Access to Your Location</button>
     <br />
     <div class="box">
       <label>Distance:</label>
@@ -19,10 +23,10 @@
     <div class="box">
       <label>Type:</label>
       <select v-model="type">
-        <option value="tourist_attraction">Tourist Atrraction</option>
+        <option value="tourist_attraction">Tourist Attraction</option>
         <option value="restaurant">Restaurant</option>
         <option value="stadium">Sports</option>
-        <option value="zoo">Zoo</option>
+        <option value="park">Park</option>
         <option value="museum">Museum</option>
       </select>
     </div>
@@ -48,7 +52,7 @@ export default {
       // long: "-81.691498",
       radius: "",
       type: "",
-      opennow: "false",
+      opennow: false,
       key: "AIzaSyANWIg-qW05HeNmXG2Yh1Fd7w8I9w4WXto",
       results: [],
       city: ""
@@ -111,6 +115,10 @@ button:hover {
   border-color: #03dbfc;
 }
 button:focus {
+  color: #03dbfc;
+  border-color: #03dbfc;
+}
+.locationAccessed {
   color: #03dbfc;
   border-color: #03dbfc;
 }
