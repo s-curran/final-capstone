@@ -5,7 +5,18 @@
       <h3 class="itemDetails">{{landmark.international_phone_number}}</h3>
       <h3 class="itemDetails">{{landmark.website}}</h3>
       <h3 class="itemDetails">Rating: {{correctRating}} out of 5 ({{correctNumRatings}} ratings)</h3>
-      <button v-on:click="addRating">Add Rating</button>
+      <!-- <button v-on:click="addRating">Add Rating</button> -->
+<p>
+<label for="rating">Your Rating:</label>
+        <select id="rating" v-model.number="inputedAverageRating">
+          <option>5</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+      </p>
+        <button type="submit" value="Submit" v-on:click="addRating">Submit Rating</button>    
       
       <div v-if="user">
       <select-itin @selected="handleEvent"></select-itin>
@@ -32,6 +43,7 @@ data() {
      cRating: {},
      apiRating: '',
      user: null,
+     inputedAverageRating: 5,
     //  correctRating: '',
     }
 },
@@ -69,8 +81,8 @@ computed:{
             LandmarkName: this.landmark.name,
             LandmarkAddress: this.landmark.vicinity,
         },
-        newAverageRating: 4,
-        newNumberOfRatings: 2,
+        newAverageRating: (((this.inputedAverageRating + (this.correctRating * this.correctNumRatings))/(this.correctNumRatings + 1)).toFixed(1)),
+        newNumberOfRatings: this.correctNumRatings + 1,
       };
     }
 },
@@ -141,6 +153,9 @@ getLandmark(id) {
             .then(response => {
                 if (response.ok) {
                 alert("Rating has been posted!");
+                this.getLandmark(this.$route.params.id);
+                this.getCRating(this.$route.params.id);
+                this.user = auth.getUser();
                 } else {
                 console.log("Could not add rating");
                 }
