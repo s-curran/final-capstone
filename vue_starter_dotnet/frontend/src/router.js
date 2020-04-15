@@ -35,6 +35,14 @@ const router = new Router({
       }
     },
     {
+      path: '/home/:id',
+      name: 'home',
+      component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: "/login",
       name: "login",
       component: Login,

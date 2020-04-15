@@ -20,9 +20,10 @@
   </div>
       <router-link :to="{ name: 'directions', params: { id: itinerary.itineraryId }}"><button>Get Optimized Route Directions</button></router-link>
     <div>
-      <button v-on:click.prevent="editshow = true">Delete Landmarks from Itinerary</button>
+      <button v-if="!editshow" v-on:click.prevent="editshow = true">Delete Landmarks from Itinerary</button>
+      <button v-if="editshow" v-on:click.prevent="editshow = false">Cancel</button>
       <!-- TODO: need this router to keep the itinerary and select it for user -->
-      <router-link :to="{name:'home', params:{id:itineraryId}}">
+      <router-link :to="{path:`/home/${itinerary.itineraryId}`}">
       <button>Add Landmarks to Itinerary</button></router-link>
     </div>
   </div>

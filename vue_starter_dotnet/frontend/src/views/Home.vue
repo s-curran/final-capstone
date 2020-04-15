@@ -4,15 +4,16 @@
     <search class="search" v-on:results="displayResults" v-model="searchResults"></search>
     <br />
     <div v-if="user" class="itin">
-      <div v-if="toggle === false" class="button">
-        <button type="button" @click="toggleForm">Create Itinerary</button>
+      <div v-if="!existingId">
+        <div v-if="toggle === false" class="button">
+          <button type="button" @click="toggleForm">Create Itinerary</button>
+        </div>
+        <div v-else>
+          <create-itin class="create" @itinerary-added="toggleForm"></create-itin>
+        </div>
+        <p>-OR-</p>
+        <select-itin @selected="handleEvent" class="selectItin"></select-itin>
       </div>
-      <div v-else>
-        <create-itin class="create" @itinerary-added="toggleForm"></create-itin>
-      </div>
-      <p>-OR-</p>
-      <select-itin  @selected="handleEvent" class="selectItin"></select-itin>
-
     </div>
     <div v-if="searchResults.length >=1">
       <h3 class="listTitle">Landmarks to visit {{cityName}}:</h3>
@@ -59,6 +60,7 @@ export default {
     return {
       cityName: "near you",
       itineraryId: "",
+      existingId: "",
       user: null,
       toggle: false,
       searchResults: [
@@ -82,6 +84,8 @@ export default {
   },
   created() {
     this.user = auth.getUser();
+    this.itineraryId = this.$route.params.id;
+    this.existingId = this.$route.params.id;
   },
   watch: {
     $route: function() {
@@ -148,7 +152,6 @@ p {
 }
 .addTo {
   display: inline;
-  
 }
 .addTo > div {
   display: inline;
