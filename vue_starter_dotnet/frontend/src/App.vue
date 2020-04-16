@@ -14,12 +14,12 @@
         </div>
       </div>
       <div v-else>
-          <button><router-link id="link" :to="{name: 'login'}">Login</router-link></button>
+          <router-link tag="button" id="link" :to="{name: 'login'}">Login</router-link>
           <div></div>
-          <button><router-link id="link" :to="{name: 'register'}">Register</router-link></button>
+          <router-link tag="button" id="link" :to="{name: 'register'}">Register</router-link>
           <!-- <button> <router-link id="link" :to="{mane: 'detail'}">Detail</router-link></button> Should not be on this page-->
       </div>
-      <button><router-link id="link" to="/">Home</router-link></Button>
+      <router-link tag="button" id="link" to="/">Home</router-link>
     </div>
 
     <router-view />
