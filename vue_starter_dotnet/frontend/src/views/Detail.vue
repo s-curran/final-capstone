@@ -6,6 +6,9 @@
       <h3 class="itemDetails">{{landmark.website}}</h3>
       <h3 class="itemDetails">Rating: {{correctRating}} out of 5 ({{correctNumRatings}} ratings)</h3>
       <!-- <button v-on:click="addRating">Add Rating</button> -->
+<button v-if="ratingshow === false" v-on:click="ratingshow = true">Submit a new Rating</button>
+
+      <div v-if="ratingshow === true">
 <p>
 <label for="rating">Your Rating:</label>
         <select id="rating" v-model.number="inputedAverageRating">
@@ -16,11 +19,18 @@
           <option>1</option>
         </select>
       </p>
-        <button type="submit" value="Submit" v-on:click="addRating">Submit Rating</button>    
-      
-      <div v-if="user">
+        <button type="submit" value="Submit" v-on:click="addRating">Submit Rating</button>  
+        <button class="cancel" v-if="ratingshow === true" v-on:click="ratingshow = false">Cancel</button>  
+      </div>
+      <div>
+      <button v-if="!addshow" v-on:click="addshow = true">Add this landmark to an Existing Itinerary</button>
+      </div>
+      <div v-if="user && addshow">
+        <div>
       <select-itin @selected="handleEvent"></select-itin>
-        <add :LandmarkId="landmark.place_id" :LandmarkName="landmark.name" :LandmarkAddress="landmark.vicinity" :ItineraryId="itineraryId"></add>
+        <add @landmark-added="addshow = false" :LandmarkId="landmark.place_id" :LandmarkName="landmark.name" :LandmarkAddress="landmark.vicinity" :ItineraryId="itineraryId"></add>
+        <button class="cancel" v-if="addshow" v-on:click="addshow = false">Cancel</button>  
+        </div>
       </div>
     </div>
 </template>
@@ -38,6 +48,8 @@ components: {
 },
 data() {
    return {
+     ratingshow: false,
+     addshow: false,
      itineraryId: '',
      landmark : {},
      cRating: {},
@@ -156,6 +168,7 @@ getLandmark(id) {
                 this.getLandmark(this.$route.params.id);
                 this.getCRating(this.$route.params.id);
                 this.user = auth.getUser();
+                this.ratingshow = false;
                 } else {
                 console.log("Could not add rating");
                 }
@@ -205,6 +218,11 @@ mounted () {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap');
+.cancel{
+  color: red;
+  border-color: red;
+}
+
 .pageTitle{
   font-family: 'Lobster', cursive;
       font-size: 55px;

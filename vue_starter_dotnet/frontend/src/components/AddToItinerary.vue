@@ -42,7 +42,7 @@ export default {
       })
         .then(response => {
           if (response.ok) {
-            
+            this.$emit("landmark-added")
             alert("Landmark has been added to itinerary");
           } else {
             alert("Landmark already in itinerary");
