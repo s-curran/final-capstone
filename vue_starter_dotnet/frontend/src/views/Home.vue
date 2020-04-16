@@ -5,13 +5,13 @@
     <br />
     <div v-if="user" class="itin">
       <div v-if="!existingId">
-        <div v-if="toggle === false" class="button">
+        <!-- <div v-if="toggle === false" class="button">
           <button type="button" @click="toggleForm">Create Itinerary</button>
+        </div> -->
+        <div v-if="toggle === true">
+          <create-itin class="create" @itinerary-added="toggle = false"></create-itin>
         </div>
-        <div v-else>
-          <create-itin class="create" @itinerary-added="toggleForm"></create-itin>
-        </div>
-        <p>-OR-</p>
+        <!-- <p>-OR-</p> -->
         <select-itin @selected="handleEvent" class="selectItin"></select-itin>
       </div>
     </div>
@@ -76,7 +76,12 @@ export default {
       this.searchResults = results;
     },
     handleEvent(selected) {
-      this.itineraryId = selected;
+      if (selected === 'Create Itinerary') {
+        this.toggle = true;
+      } else {
+        this.itineraryId = selected;
+        this.toggle = false;
+      }
     },
     toggleForm() {
       this.toggle = !this.toggle;
