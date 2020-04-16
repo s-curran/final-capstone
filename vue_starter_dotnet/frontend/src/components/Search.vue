@@ -2,12 +2,16 @@
   <div class="search">
     <!-- <input type="text" placeholder="Enter your city..." v-model="city" /> -->
     <br />
-
+    <div class="box">
+      <label>Location:</label>
+      <input type="text" id="text" v-model="address" @blur="getLatLong" placeholder="City, State"/>
+    </div>
     <button
+    class="search"
       type="button"
       @click="getLocation"
       v-bind:class="{locationAccessed: lat}"
-    >Allow Access to Your Location</button>
+    >Or Get Current Location</button>
     <br />
     <div class="box">
       <label>Distance:</label>
@@ -30,11 +34,12 @@
         <option value="museum">Museum</option>
       </select>
     </div>
-
-    <label>Only open now</label>
+    <div class="box">
+    <label id="opennow">Only open now</label>
     <input type="checkbox" v-model="opennow" />
+    </div>
     <br />
-    <button type="submit" @click="findLandmarks">Submit</button>
+    <button class="search" type="submit" @click="findLandmarks">Submit</button>
     <!-- <ul>
       <li v-for="result in results" v-bind:key="result.id">{{result.name}}</li>
     </ul>-->
@@ -46,6 +51,7 @@ export default {
   name: "Search",
   data() {
     return {
+      address: "",
       lat: "",
       long: "",
       // lat: "41.505550",
@@ -78,6 +84,23 @@ export default {
           console.log(err);
         });
     },
+    getLatLong() {
+      let url = `${process.env.VUE_APP_REMOTE_API}/search/address?address=${this.address}`;
+
+      fetch(url)
+        .then(response => {
+          if (response.ok) {
+            response.json().then(json => {
+              this.lat = json.results[0].geometry.location.lat;
+              this.long = json.results[0].geometry.location.lng;
+            });
+          } else {
+            alert("Enter a different address");
+          }
+        })
+        .catch(err => console.error(err));
+    },
+
     getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);
@@ -94,6 +117,10 @@ export default {
 </script>
 
 <style>
+button.search{
+    width: 300px;
+
+}
 button {
   display: inline-block;
   padding: 0.5em 3em;
@@ -118,6 +145,21 @@ button:focus {
   color: #03dbfc;
   border-color: #03dbfc;
 }
+input#text {
+    display: inline-block;
+  padding: 0.5em 3em;
+  border: 0.16em solid #515458;
+  margin: 5px 0.3em 0.3em 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Verdana", sans-serif;
+  font-weight: 400;
+  color: #515458;
+  text-align: center;
+  width: 200px;
+}
 .locationAccessed {
   color: #03dbfc;
   border-color: #03dbfc;
@@ -128,6 +170,12 @@ label {
   font-family: "Verdana", sans-serif;
   font-weight: 500;
   color: #515458;
+}
+input[checkbox] {
+  width: 10px;
+}
+#opennow {
+  width: 200px;
 }
 
 .box {
