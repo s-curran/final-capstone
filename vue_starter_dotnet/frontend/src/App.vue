@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
     <!-- <img src="./views/pic1.png" /> -->
-    <h1 id="pageTitle">City Tours</h1>
+    <h1 id="pageTitle">Build City Tours</h1>
 
       <div v-if="user">
         

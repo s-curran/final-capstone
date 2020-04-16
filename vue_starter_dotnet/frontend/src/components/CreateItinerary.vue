@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="box">
-    <label>Itinenary Name</label>
+    <label>Itinerary Name</label>
     <input type="text" v-model="itinerary.TourName" />
     </div>
     <div class="box">
-    <label>Itinenary Date</label>
+    <label>Itinerary Date</label>
     <input type="date" v-model="itinerary.DateOfTour" />
     </div><div class="box">
     <label>Starting Address</label>
@@ -100,11 +100,21 @@ label {
 .box {
   margin: 0 auto 0 auto;
   display: flex;
+  flex-wrap: wrap;
   width: 400px;
   justify-content: space-between;
   align-items: center;
 }
-
+@media only screen and (max-width: 377px) {
+  .box {
+      margin: 0 auto 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+  justify-content: center;
+  align-items: center;
+  }
+}
 input {
   display: inline-block;
   padding: 0.5em 1em;
