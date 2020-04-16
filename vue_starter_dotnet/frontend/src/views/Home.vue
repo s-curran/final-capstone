@@ -12,7 +12,7 @@
           <create-itin class="create" @itinerary-added="toggle = false"></create-itin>
         </div>
         <!-- <p>-OR-</p> -->
-        <select-itin @selected="handleEvent" class="selectItin"></select-itin>
+        <select-itin :show="true" @selected="handleEvent" class="selectItin"></select-itin>
       </div>
     </div>
     <div v-if="searchResults.length >=1">

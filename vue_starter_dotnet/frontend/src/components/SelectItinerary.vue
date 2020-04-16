@@ -3,7 +3,7 @@
     <select v-model='selected' @focus="getItins" @click='selectItin'>
         <option value="" disabled selected>Select your Itinerary</option>
       <option v-for="option in options" v-bind:key="option.itineraryId" v-bind:value="option.itineraryId">{{option.tourName}}</option>
-      <option value="Create Itinerary">Create New Itinerary</option>
+      <option v-if="showCreate" value="Create Itinerary">Create New Itinerary</option>
     </select>
     <!-- <button type='button' @click='selectItin'>Select</button> -->
   </div>
@@ -14,10 +14,18 @@ import auth from '../auth'
 
 export default {
     name: 'SelectItin',
+    props: {
+        show: Boolean
+    },
     data() {
         return {
             options: [],
             selected: ''
+        }
+    },
+    computed: {
+        showCreate: function() {
+            return this.show;
         }
     },
     methods: {

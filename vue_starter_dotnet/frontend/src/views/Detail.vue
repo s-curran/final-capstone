@@ -1,7 +1,7 @@
 <template>
     <div id="detail">
       <h1 class="itemDetails">
-        <a :href="landmark.website">{{landmark.name}}</a></h1>
+        <a target="_blank" :href="landmark.website">{{landmark.name}}</a></h1>
       <h3 class="itemDetails">{{landmark.vicinity}}</h3>
       <h3 class="itemDetails">{{landmark.international_phone_number}}</h3>
       <!-- <h3 class="itemDetails">{{landmark.website}}</h3> -->

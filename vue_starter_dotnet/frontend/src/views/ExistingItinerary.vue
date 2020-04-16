@@ -124,7 +124,7 @@ export default {
             .then(response => {
                 if (response.ok) {
                 alert("Starting location has been updated!");
-                window.location.reload();
+                this.getItinerary(this.$route.params.id);
                 // this.getLandmark(this.$route.params.id);
                 // this.getCRating(this.$route.params.id);
                 // this.user = auth.getUser();
