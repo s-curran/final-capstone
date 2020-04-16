@@ -135,8 +135,11 @@ export default {
             .catch(err => console.error(err))
         },
     getDate(datetime) {
-      let date = new Date(datetime).toJSON().slice(0,10).replace(/-/g,'/')
-      return date
+      let date = new Date(datetime)
+      let dd = date.getDate();
+      let mm = date.getMonth();
+      let yyyy = date.getFullYear();
+      return `${mm}/${dd}/${yyyy}`
     },
     deleteLandmark() {
       fetch(`${process.env.VUE_APP_REMOTE_API}/itinerary/remove?itineraryid=${this.ItineraryId}&landmarkid=${this.LandmarkId}`, {
