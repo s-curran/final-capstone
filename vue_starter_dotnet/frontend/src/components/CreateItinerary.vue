@@ -105,7 +105,7 @@ label {
   justify-content: space-between;
   align-items: center;
 }
-@media only screen and (max-width: 377px) {
+@media only screen and (max-width: 425px) {
   .box {
       margin: 0 auto 0 auto;
   display: flex;

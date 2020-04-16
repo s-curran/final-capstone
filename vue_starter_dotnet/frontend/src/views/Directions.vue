@@ -94,14 +94,16 @@ div {
   font-family: verdana;
 }
 ul {
-  max-inline-size: 50%;
-  justify-content: center;
   text-align: left;
-  display: grid;
   list-style-type: square;
   margin-bottom: 15px;
   font-size: 18px;
-  
+  margin-left: 100px;
+}
+@media only screen and (max-width: 425px) {
+ul {
+margin-left: 0px;
+}
 }
 li {
   margin-bottom: 10px;
