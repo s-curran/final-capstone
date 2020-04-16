@@ -1,9 +1,10 @@
 <template>
     <div id="detail">
-      <h1 class="itemDetails">{{landmark.name}}</h1>
+      <h1 class="itemDetails">
+        <a :href="landmark.website">{{landmark.name}}</a></h1>
       <h3 class="itemDetails">{{landmark.vicinity}}</h3>
       <h3 class="itemDetails">{{landmark.international_phone_number}}</h3>
-      <h3 class="itemDetails">{{landmark.website}}</h3>
+      <!-- <h3 class="itemDetails">{{landmark.website}}</h3> -->
       <h3 class="itemDetails">Rating: {{correctRating}} out of 5 ({{correctNumRatings}} ratings)</h3>
       <!-- <button v-on:click="addRating">Add Rating</button> -->
 <button v-if="ratingshow === false" v-on:click="ratingshow = true">Submit a new Rating</button>
@@ -23,7 +24,7 @@
         <button class="cancel" v-if="ratingshow === true" v-on:click="ratingshow = false">Cancel</button>  
       </div>
       <div>
-      <button v-if="!addshow" v-on:click="addshow = true">Add this landmark to an Existing Itinerary</button>
+      <button v-if="!addshow && user" v-on:click="addshow = true">Add this landmark to an Existing Itinerary</button>
       </div>
       <div v-if="user && addshow">
         <div>
